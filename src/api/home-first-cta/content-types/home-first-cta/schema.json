@@ -1,0 +1,36 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_first_ctas",
+  "info": {
+    "singularName": "home-first-cta",
+    "pluralName": "home-first-ctas",
+    "displayName": "Home First CTA"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "button_enable": {
+      "type": "boolean"
+    },
+    "button_link": {
+      "type": "string"
+    },
+    "section_image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

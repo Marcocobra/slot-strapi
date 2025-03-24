@@ -1,0 +1,17 @@
+{
+  "kind": "collectionType",
+  "collectionName": "slot_themes",
+  "info": {
+    "singularName": "slot-theme",
+    "pluralName": "slot-themes",
+    "displayName": "slot-theme"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}

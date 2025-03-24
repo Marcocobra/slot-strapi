@@ -1,0 +1,38 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_second_ctas",
+  "info": {
+    "singularName": "home-second-cta",
+    "pluralName": "home-second-ctas",
+    "displayName": "Home Second CTA",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "button_enable": {
+      "type": "boolean"
+    },
+    "section_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "button_link": {
+      "type": "string"
+    }
+  }
+}
