@@ -4,7 +4,8 @@
   "info": {
     "singularName": "slot-theme",
     "pluralName": "slot-themes",
-    "displayName": "slot-theme"
+    "displayName": "slot-theme",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,6 +13,12 @@
   "attributes": {
     "title": {
       "type": "string"
+    },
+    "slot": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::slot.slot",
+      "inversedBy": "slot_theme"
     }
   }
 }

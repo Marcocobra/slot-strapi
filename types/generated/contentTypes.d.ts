@@ -441,6 +441,7 @@ export interface ApiHomeSecondCtaHomeSecondCta extends Struct.SingleTypeSchema {
 export interface ApiSlotThemeSlotTheme extends Struct.CollectionTypeSchema {
   collectionName: 'slot_themes';
   info: {
+    description: '';
     displayName: 'slot-theme';
     pluralName: 'slot-themes';
     singularName: 'slot-theme';
@@ -459,6 +460,7 @@ export interface ApiSlotThemeSlotTheme extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    slot: Schema.Attribute.Relation<'oneToOne', 'api::slot.slot'>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -469,6 +471,7 @@ export interface ApiSlotThemeSlotTheme extends Struct.CollectionTypeSchema {
 export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
   collectionName: 'slots';
   info: {
+    description: '';
     displayName: 'slot';
     pluralName: 'slots';
     singularName: 'slot';
@@ -477,27 +480,45 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    cons: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Blocks;
+    game_link: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'> &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_title: Schema.Attribute.String;
+    payline_system: Schema.Attribute.Enumeration<
+      ['standard', 'cascading', 'megaways']
+    >;
+    paylines: Schema.Attribute.BigInteger;
+    pros: Schema.Attribute.Blocks;
+    provider_logo: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     publishedAt: Schema.Attribute.DateTime;
-    review: Schema.Attribute.Integer &
+    rating: Schema.Attribute.Integer &
       Schema.Attribute.SetMinMax<
         {
           max: 5;
         },
         number
       >;
-    slug: Schema.Attribute.String;
+    rtp: Schema.Attribute.BigInteger;
+    slot_theme: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::slot-theme.slot-theme'
+    >;
+    slug: Schema.Attribute.UID<'title'>;
     thumbnail: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    volatility: Schema.Attribute.Enumeration<['high', 'medium', 'low']>;
   };
 }
 

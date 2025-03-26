@@ -4,7 +4,8 @@
   "info": {
     "singularName": "slot",
     "pluralName": "slots",
-    "displayName": "slot"
+    "displayName": "slot",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -13,25 +14,81 @@
     "title": {
       "type": "string"
     },
-    "review": {
+    "rating": {
       "type": "integer",
       "max": 5
     },
     "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "description": {
       "type": "blocks"
     },
     "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "slot_theme": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::slot-theme.slot-theme",
+      "mappedBy": "slot"
+    },
+    "pros": {
+      "type": "blocks"
+    },
+    "cons": {
+      "type": "blocks"
+    },
+    "game_link": {
       "type": "string"
+    },
+    "provider_logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "rtp": {
+      "type": "biginteger"
+    },
+    "paylines": {
+      "type": "biginteger"
+    },
+    "payline_system": {
+      "type": "enumeration",
+      "enum": [
+        "standard",
+        "cascading",
+        "megaways"
+      ]
+    },
+    "volatility": {
+      "type": "enumeration",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "meta_title": {
+      "type": "string"
+    },
+    "meta_description": {
+      "type": "text"
     }
   }
 }
