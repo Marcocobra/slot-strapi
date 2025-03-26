@@ -89,6 +89,24 @@
     },
     "meta_description": {
       "type": "text"
+    },
+    "related_slots": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::slot.slot",
+      "inversedBy": "slots"
+    },
+    "slots": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::slot.slot",
+      "mappedBy": "related_slots"
+    },
+    "casinos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::casino.casino",
+      "inversedBy": "casino"
     }
   }
 }

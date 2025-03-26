@@ -369,6 +369,38 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCasinoCasino extends Struct.CollectionTypeSchema {
+  collectionName: 'casinos';
+  info: {
+    displayName: 'casino';
+    pluralName: 'casinos';
+    singularName: 'casino';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    casino: Schema.Attribute.Relation<'manyToMany', 'api::slot.slot'>;
+    collaborations: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    link: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::casino.casino'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'name'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiHomeFirstCtaHomeFirstCta extends Struct.SingleTypeSchema {
   collectionName: 'home_first_ctas';
   info: {
@@ -480,6 +512,7 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    casinos: Schema.Attribute.Relation<'manyToMany', 'api::casino.casino'>;
     cons: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -507,11 +540,13 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
         },
         number
       >;
+    related_slots: Schema.Attribute.Relation<'manyToMany', 'api::slot.slot'>;
     rtp: Schema.Attribute.BigInteger;
     slot_theme: Schema.Attribute.Relation<
       'oneToOne',
       'api::slot-theme.slot-theme'
     >;
+    slots: Schema.Attribute.Relation<'manyToMany', 'api::slot.slot'>;
     slug: Schema.Attribute.UID<'title'>;
     thumbnail: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String;
@@ -1031,6 +1066,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::casino.casino': ApiCasinoCasino;
       'api::home-first-cta.home-first-cta': ApiHomeFirstCtaHomeFirstCta;
       'api::home-second-cta.home-second-cta': ApiHomeSecondCtaHomeSecondCta;
       'api::slot-theme.slot-theme': ApiSlotThemeSlotTheme;
