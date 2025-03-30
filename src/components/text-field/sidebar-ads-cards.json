@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_text_field_sidebar_ads_cards",
+  "info": {
+    "displayName": "sidebar ads cards",
+    "icon": "dashboard",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "blocks"
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "read_the_guideline_link": {
+      "type": "string"
+    },
+    "visit_the_site_link": {
+      "type": "string"
+    },
+    "sidebar_ads_cards_details": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.sidebar-cards-details"
+    }
+  }
+}

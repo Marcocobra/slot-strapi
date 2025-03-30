@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_text_field_repeatables",
+  "info": {
+    "displayName": "repeatable",
+    "icon": "apps",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_text_field_primary_ads_cards",
+  "info": {
+    "displayName": "Primary ads card",
+    "icon": "chartBubble",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "link": {
+      "type": "string"
+    },
+    "title": {
+      "type": "blocks"
+    }
+  }
+}

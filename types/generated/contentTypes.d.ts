@@ -470,6 +470,44 @@ export interface ApiHomeSecondCtaHomeSecondCta extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiSlotPageSlotPage extends Struct.SingleTypeSchema {
+  collectionName: 'slot_pages';
+  info: {
+    description: '';
+    displayName: 'slot page';
+    pluralName: 'slot-pages';
+    singularName: 'slot-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ads_cards: Schema.Attribute.Component<'text-field.primary-ads-card', true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::slot-page.slot-page'
+    > &
+      Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
+    meta_title: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    sidebar_ads_cards: Schema.Attribute.Component<
+      'text-field.sidebar-ads-cards',
+      true
+    >;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSlotThemeSlotTheme extends Struct.CollectionTypeSchema {
   collectionName: 'slot_themes';
   info: {
@@ -1069,6 +1107,7 @@ declare module '@strapi/strapi' {
       'api::casino.casino': ApiCasinoCasino;
       'api::home-first-cta.home-first-cta': ApiHomeFirstCtaHomeFirstCta;
       'api::home-second-cta.home-second-cta': ApiHomeSecondCtaHomeSecondCta;
+      'api::slot-page.slot-page': ApiSlotPageSlotPage;
       'api::slot-theme.slot-theme': ApiSlotThemeSlotTheme;
       'api::slot.slot': ApiSlotSlot;
       'plugin::content-releases.release': PluginContentReleasesRelease;

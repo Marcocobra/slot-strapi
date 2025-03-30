@@ -1,0 +1,43 @@
+{
+  "kind": "singleType",
+  "collectionName": "slot_pages",
+  "info": {
+    "singularName": "slot-page",
+    "pluralName": "slot-pages",
+    "displayName": "slot page",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "meta_keyword": {
+      "displayName": "repeatable",
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.repeatable"
+    },
+    "ads_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.primary-ads-card"
+    },
+    "sidebar_ads_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.sidebar-ads-cards"
+    },
+    "meta_title": {
+      "type": "string"
+    },
+    "meta_description": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_text_field_sidebar_cards_details",
+  "info": {
+    "displayName": "sidebar cards details",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "details_title": {
+      "type": "string"
+    }
+  }
+}
