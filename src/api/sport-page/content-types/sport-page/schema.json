@@ -1,28 +1,16 @@
 {
   "kind": "singleType",
-  "collectionName": "slot_pages",
+  "collectionName": "sport_pages",
   "info": {
-    "singularName": "slot-page",
-    "pluralName": "slot-pages",
-    "displayName": "Slot page",
+    "singularName": "sport-page",
+    "pluralName": "sport-pages",
+    "displayName": "Sport page",
     "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "description": {
-      "type": "text"
-    },
-    "meta_keyword": {
-      "displayName": "repeatable",
-      "type": "component",
-      "repeatable": true,
-      "component": "text-field.repeatable"
-    },
     "ads_cards": {
       "type": "component",
       "repeatable": true,
@@ -33,11 +21,21 @@
       "repeatable": true,
       "component": "text-field.sidebar-ads-cards"
     },
+    "featured_sports": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::sport.sport"
+    },
     "meta_title": {
       "type": "string"
     },
     "meta_description": {
-      "type": "text"
+      "type": "string"
+    },
+    "meta_keyword": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.repeatable"
     }
   }
 }

@@ -474,7 +474,7 @@ export interface ApiSlotPageSlotPage extends Struct.SingleTypeSchema {
   collectionName: 'slot_pages';
   info: {
     description: '';
-    displayName: 'slot page';
+    displayName: 'Slot page';
     pluralName: 'slot-pages';
     singularName: 'slot-page';
   };
@@ -567,9 +567,7 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     >;
     paylines: Schema.Attribute.BigInteger;
     pros: Schema.Attribute.Blocks;
-    provider_logo: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
+    provider_logo: Schema.Attribute.Media<'images'>;
     publishedAt: Schema.Attribute.DateTime;
     rating: Schema.Attribute.Integer &
       Schema.Attribute.SetMinMax<
@@ -586,12 +584,78 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     >;
     slots: Schema.Attribute.Relation<'manyToMany', 'api::slot.slot'>;
     slug: Schema.Attribute.UID<'title'>;
-    thumbnail: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    thumbnail: Schema.Attribute.Media<'images'>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     volatility: Schema.Attribute.Enumeration<['high', 'medium', 'low']>;
+  };
+}
+
+export interface ApiSportPageSportPage extends Struct.SingleTypeSchema {
+  collectionName: 'sport_pages';
+  info: {
+    description: '';
+    displayName: 'Sport page';
+    pluralName: 'sport-pages';
+    singularName: 'sport-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ads_cards: Schema.Attribute.Component<'text-field.primary-ads-card', true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    featured_sports: Schema.Attribute.Relation<'oneToOne', 'api::sport.sport'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sport-page.sport-page'
+    > &
+      Schema.Attribute.Private;
+    meta_description: Schema.Attribute.String;
+    meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
+    meta_title: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    sidebar_ads_cards: Schema.Attribute.Component<
+      'text-field.sidebar-ads-cards',
+      true
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSportSport extends Struct.CollectionTypeSchema {
+  collectionName: 'sports';
+  info: {
+    description: '';
+    displayName: 'sport';
+    pluralName: 'sports';
+    singularName: 'sport';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::sport.sport'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'>;
+    thumbnail: Schema.Attribute.Media<'images' | 'files'>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1110,6 +1174,8 @@ declare module '@strapi/strapi' {
       'api::slot-page.slot-page': ApiSlotPageSlotPage;
       'api::slot-theme.slot-theme': ApiSlotThemeSlotTheme;
       'api::slot.slot': ApiSlotSlot;
+      'api::sport-page.sport-page': ApiSportPageSportPage;
+      'api::sport.sport': ApiSportSport;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
