@@ -12,26 +12,30 @@
   },
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "rating": {
       "type": "integer",
-      "max": 5
+      "max": 5,
+      "required": true
     },
     "thumbnail": {
       "type": "media",
       "multiple": false,
-      "required": false,
+      "required": true,
       "allowedTypes": [
         "images"
       ]
     },
     "description": {
-      "type": "blocks"
+      "type": "blocks",
+      "required": true
     },
     "slug": {
       "type": "uid",
-      "targetField": "title"
+      "targetField": "title",
+      "required": true
     },
     "slot_theme": {
       "type": "relation",
@@ -40,13 +44,16 @@
       "mappedBy": "slot"
     },
     "pros": {
-      "type": "blocks"
+      "type": "blocks",
+      "required": true
     },
     "cons": {
-      "type": "blocks"
+      "type": "blocks",
+      "required": true
     },
     "game_link": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "provider_logo": {
       "type": "media",
