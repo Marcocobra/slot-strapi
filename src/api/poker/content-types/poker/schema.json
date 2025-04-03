@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pokers",
+  "info": {
+    "singularName": "poker",
+    "pluralName": "pokers",
+    "displayName": "poker"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "thumbnail": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    }
+  }
+}

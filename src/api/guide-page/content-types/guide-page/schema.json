@@ -1,0 +1,40 @@
+{
+  "kind": "singleType",
+  "collectionName": "guide_pages",
+  "info": {
+    "singularName": "guide-page",
+    "pluralName": "guide-pages",
+    "displayName": "Guide page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "ads_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.primary-ads-card"
+    },
+    "sidebar_ads_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.sidebar-ads-cards"
+    },
+    "featured_guide": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::guide.guide"
+    },
+    "meta_title": {
+      "type": "string"
+    },
+    "meta_description": {
+      "type": "text"
+    },
+    "meta_keyword": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.repeatable"
+    }
+  }
+}

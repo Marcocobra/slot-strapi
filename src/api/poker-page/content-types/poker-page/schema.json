@@ -1,0 +1,40 @@
+{
+  "kind": "singleType",
+  "collectionName": "poker_pages",
+  "info": {
+    "singularName": "poker-page",
+    "pluralName": "poker-pages",
+    "displayName": "Poker page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "ads_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.primary-ads-card"
+    },
+    "sidebar_ads_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.sidebar-ads-cards"
+    },
+    "featured_poker": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::poker.poker"
+    },
+    "meta_title": {
+      "type": "string"
+    },
+    "meta_description": {
+      "type": "text"
+    },
+    "meta_keyword": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.repeatable"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "kind": "singleType",
+  "collectionName": "casino_pages",
+  "info": {
+    "singularName": "casino-page",
+    "pluralName": "casino-pages",
+    "displayName": "Casino page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "ads_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.primary-ads-card"
+    },
+    "sidebar_ads_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.sidebar-ads-cards"
+    },
+    "featured_casino": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::casino.casino"
+    },
+    "meta_title": {
+      "type": "string"
+    },
+    "meta_description": {
+      "type": "text"
+    },
+    "meta_keyword": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.repeatable"
+    }
+  }
+}

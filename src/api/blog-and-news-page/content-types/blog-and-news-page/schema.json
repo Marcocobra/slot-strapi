@@ -1,0 +1,40 @@
+{
+  "kind": "singleType",
+  "collectionName": "blog_and_news_pages",
+  "info": {
+    "singularName": "blog-and-news-page",
+    "pluralName": "blog-and-news-pages",
+    "displayName": "Blog and news page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "ads_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.primary-ads-card"
+    },
+    "sidebar_ads_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.sidebar-ads-cards"
+    },
+    "featured_blog": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::blog.blog"
+    },
+    "meta_title": {
+      "type": "string"
+    },
+    "meta_description": {
+      "type": "text"
+    },
+    "meta_keyword": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.repeatable"
+    }
+  }
+}
