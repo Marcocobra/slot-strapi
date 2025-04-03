@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "welcome_bonuses",
+  "info": {
+    "singularName": "welcome-bonus",
+    "pluralName": "welcome-bonuses",
+    "displayName": "Welcome bonus"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "rating": {
+      "type": "integer",
+      "max": 5,
+      "required": true
+    },
+    "no_deposit": {
+      "type": "biginteger",
+      "required": false
+    },
+    "with_deposit": {
+      "type": "biginteger"
+    },
+    "visit_the_site_link": {
+      "type": "string"
+    }
+  }
+}

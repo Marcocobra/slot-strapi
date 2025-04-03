@@ -897,6 +897,80 @@ export interface ApiSportSport extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiWelcomeBonusPageWelcomeBonusPage
+  extends Struct.SingleTypeSchema {
+  collectionName: 'welcome_bonus_pages';
+  info: {
+    description: '';
+    displayName: 'Welcome bonus page';
+    pluralName: 'welcome-bonus-pages';
+    singularName: 'welcome-bonus-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-page.welcome-bonus-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    section_description: Schema.Attribute.Blocks;
+    section_title: Schema.Attribute.String;
+    thumbnail: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiWelcomeBonusWelcomeBonus
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'welcome_bonuses';
+  info: {
+    displayName: 'Welcome bonus';
+    pluralName: 'welcome-bonuses';
+    singularName: 'welcome-bonus';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus.welcome-bonus'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    no_deposit: Schema.Attribute.BigInteger;
+    publishedAt: Schema.Attribute.DateTime;
+    rating: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+        },
+        number
+      >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    visit_the_site_link: Schema.Attribute.String;
+    with_deposit: Schema.Attribute.BigInteger;
+  };
+}
+
 export interface ApiWhoWeAreWhoWeAre extends Struct.SingleTypeSchema {
   collectionName: 'who_we_ares';
   info: {
@@ -1453,6 +1527,8 @@ declare module '@strapi/strapi' {
       'api::slot.slot': ApiSlotSlot;
       'api::sport-page.sport-page': ApiSportPageSportPage;
       'api::sport.sport': ApiSportSport;
+      'api::welcome-bonus-page.welcome-bonus-page': ApiWelcomeBonusPageWelcomeBonusPage;
+      'api::welcome-bonus.welcome-bonus': ApiWelcomeBonusWelcomeBonus;
       'api::who-we-are.who-we-are': ApiWhoWeAreWhoWeAre;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

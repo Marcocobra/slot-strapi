@@ -1,0 +1,35 @@
+{
+  "kind": "singleType",
+  "collectionName": "welcome_bonus_pages",
+  "info": {
+    "singularName": "welcome-bonus-page",
+    "pluralName": "welcome-bonus-pages",
+    "displayName": "Welcome bonus page",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "section_title": {
+      "type": "string"
+    },
+    "section_description": {
+      "type": "blocks"
+    }
+  }
+}
