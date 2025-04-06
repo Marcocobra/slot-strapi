@@ -10,7 +10,8 @@ export interface TextFieldPrimaryAdsCard extends Struct.ComponentSchema {
   attributes: {
     link: Schema.Attribute.String;
     thumbnail: Schema.Attribute.Media<'images' | 'files'>;
-    title: Schema.Attribute.Blocks;
+    with_deposit: Schema.Attribute.String;
+    without_deposit: Schema.Attribute.String;
   };
 }
 
@@ -42,8 +43,9 @@ export interface TextFieldSidebarAdsCards extends Struct.ComponentSchema {
       true
     >;
     thumbnail: Schema.Attribute.Media<'images' | 'files'>;
-    title: Schema.Attribute.Blocks;
     visit_the_site_link: Schema.Attribute.String;
+    with_deposit: Schema.Attribute.String;
+    without_deposit: Schema.Attribute.String;
   };
 }
 

@@ -7,9 +7,6 @@
   },
   "options": {},
   "attributes": {
-    "title": {
-      "type": "blocks"
-    },
     "thumbnail": {
       "type": "media",
       "multiple": false,
@@ -34,6 +31,12 @@
       "type": "customField",
       "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
       "customField": "plugin::color-picker.color"
+    },
+    "with_deposit": {
+      "type": "string"
+    },
+    "without_deposit": {
+      "type": "string"
     }
   }
 }

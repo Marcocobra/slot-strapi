@@ -19,8 +19,11 @@
     "link": {
       "type": "string"
     },
-    "title": {
-      "type": "blocks"
+    "with_deposit": {
+      "type": "string"
+    },
+    "without_deposit": {
+      "type": "string"
     }
   }
 }
