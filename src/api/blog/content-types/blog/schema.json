@@ -15,10 +15,6 @@
       "type": "string",
       "required": true
     },
-    "description": {
-      "type": "blocks",
-      "required": true
-    },
     "thumbnail": {
       "type": "media",
       "multiple": false,
@@ -30,6 +26,10 @@
     "slug": {
       "type": "uid",
       "targetField": "title",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
       "required": true
     }
   }

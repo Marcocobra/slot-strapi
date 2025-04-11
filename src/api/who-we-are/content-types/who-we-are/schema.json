@@ -4,7 +4,8 @@
   "info": {
     "singularName": "who-we-are",
     "pluralName": "who-we-ares",
-    "displayName": "who we are"
+    "displayName": "who we are",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,9 +13,6 @@
   "attributes": {
     "title": {
       "type": "string"
-    },
-    "description": {
-      "type": "blocks"
     },
     "meta_title": {
       "type": "string"
@@ -26,6 +24,9 @@
       "type": "component",
       "repeatable": true,
       "component": "text-field.repeatable"
+    },
+    "description": {
+      "type": "richtext"
     }
   }
 }

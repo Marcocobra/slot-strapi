@@ -4,7 +4,8 @@
   "info": {
     "singularName": "welcome-bonus",
     "pluralName": "welcome-bonuses",
-    "displayName": "Welcome bonus"
+    "displayName": "Welcome bonus",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,18 +16,18 @@
       "required": true
     },
     "rating": {
-      "type": "integer",
+      "type": "decimal",
       "max": 5,
       "required": true
     },
+    "visit_the_site_link": {
+      "type": "string"
+    },
     "no_deposit": {
-      "type": "biginteger",
+      "type": "string",
       "required": false
     },
     "with_deposit": {
-      "type": "biginteger"
-    },
-    "visit_the_site_link": {
       "type": "string"
     }
   }

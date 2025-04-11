@@ -8,7 +8,11 @@ export interface TextFieldPrimaryAdsCard extends Struct.ComponentSchema {
     icon: 'chartBubble';
   };
   attributes: {
+    bg_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     link: Schema.Attribute.String;
+    text_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     thumbnail: Schema.Attribute.Media<'images' | 'files'>;
     with_deposit: Schema.Attribute.String;
     without_deposit: Schema.Attribute.String;
@@ -35,13 +39,15 @@ export interface TextFieldSidebarAdsCards extends Struct.ComponentSchema {
     icon: 'dashboard';
   };
   attributes: {
-    card_color: Schema.Attribute.String &
+    bg_color: Schema.Attribute.String &
       Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     read_the_guideline_link: Schema.Attribute.String;
     sidebar_ads_cards_details: Schema.Attribute.Component<
       'text-field.sidebar-cards-details',
       true
     >;
+    text_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     thumbnail: Schema.Attribute.Media<'images' | 'files'>;
     visit_the_site_link: Schema.Attribute.String;
     with_deposit: Schema.Attribute.String;

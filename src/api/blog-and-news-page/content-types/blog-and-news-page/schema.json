@@ -4,7 +4,8 @@
   "info": {
     "singularName": "blog-and-news-page",
     "pluralName": "blog-and-news-pages",
-    "displayName": "Blog and news page"
+    "displayName": "Blog and news page",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true

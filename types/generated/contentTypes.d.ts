@@ -373,6 +373,7 @@ export interface ApiBlogAndNewsPageBlogAndNewsPage
   extends Struct.SingleTypeSchema {
   collectionName: 'blog_and_news_pages';
   info: {
+    description: '';
     displayName: 'Blog and news page';
     pluralName: 'blog-and-news-pages';
     singularName: 'blog-and-news-page';
@@ -421,7 +422,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    description: Schema.Attribute.RichText & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
       Schema.Attribute.Private;
@@ -491,6 +492,7 @@ export interface ApiCasinoCasino extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    description: Schema.Attribute.RichText;
     link: Schema.Attribute.String & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -501,6 +503,7 @@ export interface ApiCasinoCasino extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    thumbnail: Schema.Attribute.Media<'images'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -558,7 +561,7 @@ export interface ApiGuideGuide extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    description: Schema.Attribute.RichText;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::guide.guide'> &
       Schema.Attribute.Private;
@@ -692,7 +695,7 @@ export interface ApiPokerPoker extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    description: Schema.Attribute.RichText & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::poker.poker'> &
       Schema.Attribute.Private;
@@ -910,19 +913,27 @@ export interface ApiWelcomeBonusPageWelcomeBonusPage
     draftAndPublish: true;
   };
   attributes: {
+    ads_cards: Schema.Attribute.Component<'text-field.primary-ads-card', true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Blocks;
+    description: Schema.Attribute.RichText & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::welcome-bonus-page.welcome-bonus-page'
     > &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
+    meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    section_description: Schema.Attribute.Blocks;
+    section_description: Schema.Attribute.RichText & Schema.Attribute.Required;
     section_title: Schema.Attribute.String;
+    sidebar_ads_cards: Schema.Attribute.Component<
+      'text-field.sidebar-ads-cards',
+      true
+    >;
     thumbnail: Schema.Attribute.Media<'images'>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
@@ -935,6 +946,7 @@ export interface ApiWelcomeBonusWelcomeBonus
   extends Struct.CollectionTypeSchema {
   collectionName: 'welcome_bonuses';
   info: {
+    description: '';
     displayName: 'Welcome bonus';
     pluralName: 'welcome-bonuses';
     singularName: 'welcome-bonus';
@@ -953,9 +965,9 @@ export interface ApiWelcomeBonusWelcomeBonus
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
-    no_deposit: Schema.Attribute.BigInteger;
+    no_deposit: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    rating: Schema.Attribute.Integer &
+    rating: Schema.Attribute.Decimal &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMax<
         {
@@ -967,13 +979,14 @@ export interface ApiWelcomeBonusWelcomeBonus
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     visit_the_site_link: Schema.Attribute.String;
-    with_deposit: Schema.Attribute.BigInteger;
+    with_deposit: Schema.Attribute.String;
   };
 }
 
 export interface ApiWhoWeAreWhoWeAre extends Struct.SingleTypeSchema {
   collectionName: 'who_we_ares';
   info: {
+    description: '';
     displayName: 'who we are';
     pluralName: 'who-we-ares';
     singularName: 'who-we-are';
@@ -985,7 +998,7 @@ export interface ApiWhoWeAreWhoWeAre extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Blocks;
+    description: Schema.Attribute.RichText;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

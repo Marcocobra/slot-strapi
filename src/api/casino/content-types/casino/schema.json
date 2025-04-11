@@ -33,6 +33,17 @@
       "relation": "manyToMany",
       "target": "api::slot.slot",
       "mappedBy": "casinos"
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "description": {
+      "type": "richtext"
     }
   }
 }

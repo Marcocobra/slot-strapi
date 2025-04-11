@@ -14,9 +14,6 @@
     "title": {
       "type": "string"
     },
-    "description": {
-      "type": "blocks"
-    },
     "thumbnail": {
       "type": "media",
       "multiple": false,
@@ -28,8 +25,34 @@
     "section_title": {
       "type": "string"
     },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
     "section_description": {
-      "type": "blocks"
+      "type": "richtext",
+      "required": true
+    },
+    "ads_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.primary-ads-card"
+    },
+    "sidebar_ads_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.sidebar-ads-cards"
+    },
+    "meta_title": {
+      "type": "string"
+    },
+    "meta_description": {
+      "type": "text"
+    },
+    "meta_keyword": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.repeatable"
     }
   }
 }
