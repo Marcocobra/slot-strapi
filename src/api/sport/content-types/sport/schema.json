@@ -31,6 +31,18 @@
     },
     "description": {
       "type": "richtext"
+    },
+    "related_sports": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::sport.sport",
+      "inversedBy": "sports"
+    },
+    "sports": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::sport.sport",
+      "mappedBy": "related_sports"
     }
   }
 }

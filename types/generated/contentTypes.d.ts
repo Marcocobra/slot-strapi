@@ -890,7 +890,9 @@ export interface ApiSportSport extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::sport.sport'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    related_sports: Schema.Attribute.Relation<'manyToMany', 'api::sport.sport'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    sports: Schema.Attribute.Relation<'manyToMany', 'api::sport.sport'>;
     thumbnail: Schema.Attribute.Media<'images' | 'files'> &
       Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -964,6 +966,7 @@ export interface ApiWelcomeBonusWelcomeBonus
       'api::welcome-bonus.welcome-bonus'
     > &
       Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<'images'>;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     no_deposit: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
