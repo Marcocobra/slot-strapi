@@ -30,6 +30,18 @@
     },
     "description": {
       "type": "richtext"
+    },
+    "related_guides": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::guide.guide",
+      "inversedBy": "guides"
+    },
+    "guides": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::guide.guide",
+      "mappedBy": "related_guides"
     }
   }
 }

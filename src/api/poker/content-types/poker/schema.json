@@ -31,6 +31,18 @@
     "description": {
       "type": "richtext",
       "required": true
+    },
+    "related_pokers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::poker.poker",
+      "inversedBy": "pokers"
+    },
+    "pokers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::poker.poker",
+      "mappedBy": "related_pokers"
     }
   }
 }

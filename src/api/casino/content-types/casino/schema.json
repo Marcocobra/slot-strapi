@@ -28,12 +28,6 @@
       "targetField": "name",
       "required": true
     },
-    "casino": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::slot.slot",
-      "mappedBy": "casinos"
-    },
     "thumbnail": {
       "type": "media",
       "multiple": false,
@@ -44,6 +38,18 @@
     },
     "description": {
       "type": "richtext"
+    },
+    "related_casinos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::casino.casino",
+      "inversedBy": "casinos"
+    },
+    "casinos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::casino.casino",
+      "mappedBy": "related_casinos"
     }
   }
 }
