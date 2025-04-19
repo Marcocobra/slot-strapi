@@ -15,11 +15,11 @@
       "type": "string",
       "required": true
     },
-    "slot": {
+    "slots": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::slot.slot",
-      "inversedBy": "slot_theme"
+      "mappedBy": "slot_theme"
     }
   }
 }

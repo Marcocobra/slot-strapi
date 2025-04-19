@@ -4,7 +4,8 @@
   "info": {
     "singularName": "home-first-cta",
     "pluralName": "home-first-ctas",
-    "displayName": "Home First CTA"
+    "displayName": "Home First CTA",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -23,14 +24,25 @@
       "type": "string"
     },
     "section_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "bg_color": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
+    },
+    "text_color": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
     }
   }
 }

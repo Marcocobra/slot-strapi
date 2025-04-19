@@ -419,7 +419,6 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -428,7 +427,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    related_blogs: Schema.Attribute.Relation<'manyToMany', 'api::blog.blog'>;
+    related_blogs: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -489,7 +488,6 @@ export interface ApiCasinoCasino extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    casinos: Schema.Attribute.Relation<'manyToMany', 'api::casino.casino'>;
     collaborations: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -505,7 +503,7 @@ export interface ApiCasinoCasino extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     related_casinos: Schema.Attribute.Relation<
-      'manyToMany',
+      'oneToMany',
       'api::casino.casino'
     >;
     slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
@@ -568,12 +566,11 @@ export interface ApiGuideGuide extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText;
-    guides: Schema.Attribute.Relation<'manyToMany', 'api::guide.guide'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::guide.guide'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    related_guides: Schema.Attribute.Relation<'manyToMany', 'api::guide.guide'>;
+    related_guides: Schema.Attribute.Relation<'oneToMany', 'api::guide.guide'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -586,6 +583,7 @@ export interface ApiGuideGuide extends Struct.CollectionTypeSchema {
 export interface ApiHomeFirstCtaHomeFirstCta extends Struct.SingleTypeSchema {
   collectionName: 'home_first_ctas';
   info: {
+    description: '';
     displayName: 'Home First CTA';
     pluralName: 'home-first-ctas';
     singularName: 'home-first-cta';
@@ -594,6 +592,8 @@ export interface ApiHomeFirstCtaHomeFirstCta extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    bg_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     button_enable: Schema.Attribute.Boolean;
     button_link: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
@@ -610,6 +610,8 @@ export interface ApiHomeFirstCtaHomeFirstCta extends Struct.SingleTypeSchema {
     section_image: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
+    text_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -629,6 +631,8 @@ export interface ApiHomeSecondCtaHomeSecondCta extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    bg_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     button_enable: Schema.Attribute.Boolean;
     button_link: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
@@ -645,6 +649,8 @@ export interface ApiHomeSecondCtaHomeSecondCta extends Struct.SingleTypeSchema {
     section_image: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
+    text_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -707,9 +713,8 @@ export interface ApiPokerPoker extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::poker.poker'> &
       Schema.Attribute.Private;
-    pokers: Schema.Attribute.Relation<'manyToMany', 'api::poker.poker'>;
     publishedAt: Schema.Attribute.DateTime;
-    related_pokers: Schema.Attribute.Relation<'manyToMany', 'api::poker.poker'>;
+    related_pokers: Schema.Attribute.Relation<'oneToMany', 'api::poker.poker'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -779,7 +784,7 @@ export interface ApiSlotThemeSlotTheme extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    slot: Schema.Attribute.Relation<'oneToOne', 'api::slot.slot'>;
+    slots: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -799,11 +804,12 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    cons: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    casinos: Schema.Attribute.Relation<'oneToMany', 'api::casino.casino'>;
+    cons: Schema.Attribute.RichText & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    description: Schema.Attribute.RichText & Schema.Attribute.Required;
     game_link: Schema.Attribute.String & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'> &
@@ -814,7 +820,8 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
       ['standard', 'cascading', 'megaways']
     >;
     paylines: Schema.Attribute.BigInteger;
-    pros: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    pros: Schema.Attribute.RichText & Schema.Attribute.Required;
+    provider: Schema.Attribute.String;
     provider_logo: Schema.Attribute.Media<'images'>;
     publishedAt: Schema.Attribute.DateTime;
     rating: Schema.Attribute.Integer &
@@ -825,13 +832,18 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
         },
         number
       >;
-    related_slots: Schema.Attribute.Relation<'manyToMany', 'api::slot.slot'>;
-    rtp: Schema.Attribute.BigInteger;
+    related_slots: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
+    rtp: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+        },
+        number
+      >;
     slot_theme: Schema.Attribute.Relation<
-      'oneToOne',
+      'manyToOne',
       'api::slot-theme.slot-theme'
     >;
-    slots: Schema.Attribute.Relation<'manyToMany', 'api::slot.slot'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -899,9 +911,8 @@ export interface ApiSportSport extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::sport.sport'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    related_sports: Schema.Attribute.Relation<'manyToMany', 'api::sport.sport'>;
+    related_sports: Schema.Attribute.Relation<'oneToMany', 'api::sport.sport'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
-    sports: Schema.Attribute.Relation<'manyToMany', 'api::sport.sport'>;
     thumbnail: Schema.Attribute.Media<'images' | 'files'> &
       Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;

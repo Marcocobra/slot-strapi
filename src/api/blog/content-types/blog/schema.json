@@ -34,15 +34,8 @@
     },
     "related_blogs": {
       "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::blog.blog",
-      "inversedBy": "blogs"
-    },
-    "blogs": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::blog.blog",
-      "mappedBy": "related_blogs"
+      "relation": "oneToMany",
+      "target": "api::blog.blog"
     }
   }
 }
