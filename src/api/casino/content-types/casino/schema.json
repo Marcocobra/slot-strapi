@@ -41,15 +41,8 @@
     },
     "related_casinos": {
       "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::casino.casino",
-      "inversedBy": "casinos"
-    },
-    "casinos": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::casino.casino",
-      "mappedBy": "related_casinos"
+      "relation": "oneToMany",
+      "target": "api::casino.casino"
     }
   }
 }

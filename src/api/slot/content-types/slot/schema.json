@@ -28,10 +28,6 @@
         "images"
       ]
     },
-    "description": {
-      "type": "blocks",
-      "required": true
-    },
     "slug": {
       "type": "uid",
       "targetField": "title",
@@ -39,17 +35,9 @@
     },
     "slot_theme": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToOne",
       "target": "api::slot-theme.slot-theme",
-      "mappedBy": "slot"
-    },
-    "pros": {
-      "type": "blocks",
-      "required": true
-    },
-    "cons": {
-      "type": "blocks",
-      "required": true
+      "inversedBy": "slots"
     },
     "game_link": {
       "type": "string",
@@ -64,7 +52,8 @@
       ]
     },
     "rtp": {
-      "type": "biginteger"
+      "type": "decimal",
+      "max": 100
     },
     "paylines": {
       "type": "biginteger"
@@ -91,17 +80,31 @@
     "meta_description": {
       "type": "text"
     },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "pros": {
+      "type": "richtext",
+      "required": true
+    },
+    "cons": {
+      "type": "richtext",
+      "required": true
+    },
+    "provider": {
+      "type": "string",
+      "required": false
+    },
     "related_slots": {
       "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::slot.slot",
-      "inversedBy": "slots"
+      "relation": "oneToMany",
+      "target": "api::slot.slot"
     },
-    "slots": {
+    "casinos": {
       "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::slot.slot",
-      "mappedBy": "related_slots"
+      "relation": "oneToMany",
+      "target": "api::casino.casino"
     }
   }
 }
