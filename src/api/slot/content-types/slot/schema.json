@@ -40,7 +40,7 @@
       "inversedBy": "slots"
     },
     "game_link": {
-      "type": "string",
+      "type": "text",
       "required": true
     },
     "provider_logo": {
