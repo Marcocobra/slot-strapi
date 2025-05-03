@@ -810,7 +810,7 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText & Schema.Attribute.Required;
-    game_link: Schema.Attribute.String & Schema.Attribute.Required;
+    game_link: Schema.Attribute.Text & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'> &
       Schema.Attribute.Private;
