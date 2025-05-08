@@ -105,6 +105,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::casino.casino"
+    },
+    "game_type": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::game-type.game-type",
+      "inversedBy": "slots"
     }
   }
 }

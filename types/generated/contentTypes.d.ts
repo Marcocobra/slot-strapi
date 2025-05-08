@@ -514,6 +514,36 @@ export interface ApiCasinoCasino extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiGameTypeGameType extends Struct.CollectionTypeSchema {
+  collectionName: 'game_types';
+  info: {
+    description: '';
+    displayName: 'game type';
+    pluralName: 'game-types';
+    singularName: 'game-type';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::game-type.game-type'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slots: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGuidePageGuidePage extends Struct.SingleTypeSchema {
   collectionName: 'guide_pages';
   info: {
@@ -811,6 +841,10 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText & Schema.Attribute.Required;
     game_link: Schema.Attribute.Text & Schema.Attribute.Required;
+    game_type: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::game-type.game-type'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'> &
       Schema.Attribute.Private;
@@ -1552,6 +1586,7 @@ declare module '@strapi/strapi' {
       'api::blog.blog': ApiBlogBlog;
       'api::casino-page.casino-page': ApiCasinoPageCasinoPage;
       'api::casino.casino': ApiCasinoCasino;
+      'api::game-type.game-type': ApiGameTypeGameType;
       'api::guide-page.guide-page': ApiGuidePageGuidePage;
       'api::guide.guide': ApiGuideGuide;
       'api::home-first-cta.home-first-cta': ApiHomeFirstCtaHomeFirstCta;
