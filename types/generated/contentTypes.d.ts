@@ -514,6 +514,36 @@ export interface ApiCasinoCasino extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiGameTypeGameType extends Struct.CollectionTypeSchema {
+  collectionName: 'game_types';
+  info: {
+    description: '';
+    displayName: 'game type';
+    pluralName: 'game-types';
+    singularName: 'game-type';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::game-type.game-type'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slots: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGuidePageGuidePage extends Struct.SingleTypeSchema {
   collectionName: 'guide_pages';
   info: {
@@ -805,21 +835,27 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
   };
   attributes: {
     casinos: Schema.Attribute.Relation<'oneToMany', 'api::casino.casino'>;
-    cons: Schema.Attribute.RichText & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText & Schema.Attribute.Required;
     game_link: Schema.Attribute.Text & Schema.Attribute.Required;
+    game_type: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::game-type.game-type'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'> &
       Schema.Attribute.Private;
+    max_win: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+        },
+        number
+      >;
     meta_description: Schema.Attribute.Text;
     meta_title: Schema.Attribute.String;
-    payline_system: Schema.Attribute.Enumeration<
-      ['standard', 'cascading', 'megaways']
-    >;
-    paylines: Schema.Attribute.BigInteger;
     pros: Schema.Attribute.RichText & Schema.Attribute.Required;
     provider: Schema.Attribute.String;
     provider_logo: Schema.Attribute.Media<'images'>;
@@ -840,6 +876,7 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
         },
         number
       >;
+    slot_preview: Schema.Attribute.Media<'files' | 'videos', true>;
     slot_theme: Schema.Attribute.Relation<
       'manyToOne',
       'api::slot-theme.slot-theme'
@@ -1552,6 +1589,7 @@ declare module '@strapi/strapi' {
       'api::blog.blog': ApiBlogBlog;
       'api::casino-page.casino-page': ApiCasinoPageCasinoPage;
       'api::casino.casino': ApiCasinoCasino;
+      'api::game-type.game-type': ApiGameTypeGameType;
       'api::guide-page.guide-page': ApiGuidePageGuidePage;
       'api::guide.guide': ApiGuideGuide;
       'api::home-first-cta.home-first-cta': ApiHomeFirstCtaHomeFirstCta;

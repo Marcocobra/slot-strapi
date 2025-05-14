@@ -20,7 +20,7 @@ export default factories.createCoreController(
 
       if (searchQuery) {
         const filteredData = data.filter((item: any) => {
-          const slot = item.attributes;
+          const slot = item;
 
           const numericQuery = parseFloat(searchQuery);
           const isNumeric = !isNaN(numericQuery) && isFinite(numericQuery);
@@ -40,13 +40,6 @@ export default factories.createCoreController(
             return true;
           }
 
-          if (
-            slot.provider &&
-            typeof slot.provider === "string" &&
-            slot.provider.toLowerCase().includes(searchQuery.toLowerCase())
-          ) {
-            return true;
-          }
           if (
             slot.provider &&
             typeof slot.provider === "string" &&
@@ -86,6 +79,17 @@ export default factories.createCoreController(
             slot.payline_system &&
             typeof slot.payline_system === "string" &&
             slot.payline_system
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())
+          ) {
+            return true;
+          }
+
+          if (
+            slot.slot_theme &&
+            slot.slot_theme.title &&
+            typeof slot.slot_theme.title === "string" &&
+            slot.slot_theme.title
               .toLowerCase()
               .includes(searchQuery.toLowerCase())
           ) {

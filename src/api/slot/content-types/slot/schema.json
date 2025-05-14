@@ -55,17 +55,6 @@
       "type": "decimal",
       "max": 100
     },
-    "paylines": {
-      "type": "biginteger"
-    },
-    "payline_system": {
-      "type": "enumeration",
-      "enum": [
-        "standard",
-        "cascading",
-        "megaways"
-      ]
-    },
     "volatility": {
       "type": "enumeration",
       "enum": [
@@ -88,10 +77,6 @@
       "type": "richtext",
       "required": true
     },
-    "cons": {
-      "type": "richtext",
-      "required": true
-    },
     "provider": {
       "type": "string",
       "required": false
@@ -105,6 +90,24 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::casino.casino"
+    },
+    "game_type": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::game-type.game-type",
+      "inversedBy": "slots"
+    },
+    "max_win": {
+      "type": "decimal",
+      "max": 100
+    },
+    "slot_preview": {
+      "allowedTypes": [
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }
