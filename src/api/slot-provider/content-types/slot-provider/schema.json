@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "slot_providers",
+  "info": {
+    "singularName": "slot-provider",
+    "pluralName": "slot-providers",
+    "displayName": "Slot provider",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "provider_logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "provider_name": {
+      "type": "string",
+      "required": true
+    },
+    "provider": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::slot.slot",
+      "mappedBy": "provider"
+    }
+  }
+}

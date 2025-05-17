@@ -11,6 +11,14 @@ export interface TextFieldPrimaryAdsCard extends Struct.ComponentSchema {
     bg_color: Schema.Attribute.String &
       Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     link: Schema.Attribute.String;
+    name: Schema.Attribute.String;
+    rating: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+        },
+        number
+      >;
     text_color: Schema.Attribute.String &
       Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     thumbnail: Schema.Attribute.Media<'images' | 'files'>;
@@ -66,6 +74,18 @@ export interface TextFieldSidebarCardsDetails extends Struct.ComponentSchema {
   };
 }
 
+export interface TextFieldSlotFaq extends Struct.ComponentSchema {
+  collectionName: 'components_text_field_slot_faqs';
+  info: {
+    description: '';
+    displayName: 'Slot-faq';
+  };
+  attributes: {
+    description: Schema.Attribute.RichText & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -73,6 +93,7 @@ declare module '@strapi/strapi' {
       'text-field.repeatable': TextFieldRepeatable;
       'text-field.sidebar-ads-cards': TextFieldSidebarAdsCards;
       'text-field.sidebar-cards-details': TextFieldSidebarCardsDetails;
+      'text-field.slot-faq': TextFieldSlotFaq;
     }
   }
 }

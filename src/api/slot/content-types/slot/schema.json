@@ -43,14 +43,6 @@
       "type": "text",
       "required": true
     },
-    "provider_logo": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "rtp": {
       "type": "decimal",
       "max": 100
@@ -77,10 +69,6 @@
       "type": "richtext",
       "required": true
     },
-    "provider": {
-      "type": "string",
-      "required": false
-    },
     "related_slots": {
       "type": "relation",
       "relation": "oneToMany",
@@ -102,12 +90,19 @@
       "max": 100
     },
     "slot_preview": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "files",
         "videos"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "provider": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::slot-provider.slot-provider",
+      "inversedBy": "provider"
     }
   }
 }
