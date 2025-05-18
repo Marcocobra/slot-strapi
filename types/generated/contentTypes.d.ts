@@ -771,6 +771,7 @@ export interface ApiSlotPageSlotPage extends Struct.SingleTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
+    faq: Schema.Attribute.Component<'text-field.slot-faq', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -786,6 +787,38 @@ export interface ApiSlotPageSlotPage extends Struct.SingleTypeSchema {
       true
     >;
     title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSlotProviderSlotProvider
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'slot_providers';
+  info: {
+    description: '';
+    displayName: 'Slot provider';
+    pluralName: 'slot-providers';
+    singularName: 'slot-provider';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::slot-provider.slot-provider'
+    > &
+      Schema.Attribute.Private;
+    provider: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
+    provider_logo: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    provider_name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -857,8 +890,10 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     meta_description: Schema.Attribute.Text;
     meta_title: Schema.Attribute.String;
     pros: Schema.Attribute.RichText & Schema.Attribute.Required;
-    provider: Schema.Attribute.String;
-    provider_logo: Schema.Attribute.Media<'images'>;
+    provider: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::slot-provider.slot-provider'
+    >;
     publishedAt: Schema.Attribute.DateTime;
     rating: Schema.Attribute.Integer &
       Schema.Attribute.Required &
@@ -1597,6 +1632,7 @@ declare module '@strapi/strapi' {
       'api::poker-page.poker-page': ApiPokerPagePokerPage;
       'api::poker.poker': ApiPokerPoker;
       'api::slot-page.slot-page': ApiSlotPageSlotPage;
+      'api::slot-provider.slot-provider': ApiSlotProviderSlotProvider;
       'api::slot-theme.slot-theme': ApiSlotThemeSlotTheme;
       'api::slot.slot': ApiSlotSlot;
       'api::sport-page.sport-page': ApiSportPageSportPage;

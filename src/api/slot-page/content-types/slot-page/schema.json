@@ -38,6 +38,11 @@
     },
     "meta_description": {
       "type": "text"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.slot-faq"
     }
   }
 }

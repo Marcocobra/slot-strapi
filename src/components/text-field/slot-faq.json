@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_text_field_slot_faqs",
+  "info": {
+    "displayName": "Slot-faq",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}
