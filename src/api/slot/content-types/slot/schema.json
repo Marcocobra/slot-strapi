@@ -85,10 +85,6 @@
       "target": "api::game-type.game-type",
       "inversedBy": "slots"
     },
-    "max_win": {
-      "type": "decimal",
-      "max": 100
-    },
     "slot_preview": {
       "type": "media",
       "multiple": true,
@@ -103,6 +99,9 @@
       "relation": "manyToOne",
       "target": "api::slot-provider.slot-provider",
       "inversedBy": "provider"
+    },
+    "max_win": {
+      "type": "decimal"
     }
   }
 }
