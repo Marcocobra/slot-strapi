@@ -880,13 +880,7 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'> &
       Schema.Attribute.Private;
-    max_win: Schema.Attribute.Decimal &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 100;
-        },
-        number
-      >;
+    max_win: Schema.Attribute.Decimal;
     meta_description: Schema.Attribute.Text;
     meta_title: Schema.Attribute.String;
     pros: Schema.Attribute.RichText & Schema.Attribute.Required;
