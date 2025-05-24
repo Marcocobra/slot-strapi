@@ -102,6 +102,11 @@
     },
     "max_win": {
       "type": "decimal"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.slot-faq"
     }
   }
 }

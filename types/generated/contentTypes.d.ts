@@ -830,7 +830,6 @@ export interface ApiSlotPageSlotPage extends Struct.SingleTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
-    faq: Schema.Attribute.Component<'text-field.slot-faq', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -931,6 +930,7 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText & Schema.Attribute.Required;
+    faq: Schema.Attribute.Component<'text-field.slot-faq', true>;
     game_link: Schema.Attribute.Text & Schema.Attribute.Required;
     game_type: Schema.Attribute.Relation<
       'manyToOne',
