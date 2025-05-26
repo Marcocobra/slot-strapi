@@ -107,6 +107,11 @@
       "type": "component",
       "repeatable": true,
       "component": "text-field.slot-faq"
+    },
+    "ads_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::welcome-bonus-card.welcome-bonus-card"
     }
   }
 }

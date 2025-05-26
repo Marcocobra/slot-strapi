@@ -23,11 +23,6 @@
       "repeatable": true,
       "component": "text-field.repeatable"
     },
-    "ads_cards": {
-      "type": "component",
-      "repeatable": true,
-      "component": "text-field.primary-ads-card"
-    },
     "sidebar_ads_cards": {
       "type": "component",
       "repeatable": true,
@@ -38,6 +33,11 @@
     },
     "meta_description": {
       "type": "text"
+    },
+    "ads_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::welcome-bonus-card.welcome-bonus-card"
     }
   }
 }

@@ -4,17 +4,13 @@
   "info": {
     "singularName": "poker-page",
     "pluralName": "poker-pages",
-    "displayName": "Poker page"
+    "displayName": "Poker page",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "attributes": {
-    "ads_cards": {
-      "type": "component",
-      "repeatable": true,
-      "component": "text-field.primary-ads-card"
-    },
     "sidebar_ads_cards": {
       "type": "component",
       "repeatable": true,
@@ -35,6 +31,11 @@
       "type": "component",
       "repeatable": true,
       "component": "text-field.repeatable"
+    },
+    "ads_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::welcome-bonus-card.welcome-bonus-card"
     }
   }
 }
