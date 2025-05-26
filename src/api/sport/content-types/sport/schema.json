@@ -36,6 +36,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::sport.sport"
+    },
+    "ads_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::welcome-bonus-card.welcome-bonus-card"
     }
   }
 }

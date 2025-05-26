@@ -382,7 +382,10 @@ export interface ApiBlogAndNewsPageBlogAndNewsPage
     draftAndPublish: true;
   };
   attributes: {
-    ads_cards: Schema.Attribute.Component<'text-field.primary-ads-card', true>;
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -419,6 +422,10 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -440,6 +447,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
 export interface ApiCasinoPageCasinoPage extends Struct.SingleTypeSchema {
   collectionName: 'casino_pages';
   info: {
+    description: '';
     displayName: 'Casino page';
     pluralName: 'casino-pages';
     singularName: 'casino-page';
@@ -448,7 +456,10 @@ export interface ApiCasinoPageCasinoPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    ads_cards: Schema.Attribute.Component<'text-field.primary-ads-card', true>;
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -488,6 +499,10 @@ export interface ApiCasinoCasino extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     collaborations: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -577,6 +592,7 @@ export interface ApiGameTypeGameType extends Struct.CollectionTypeSchema {
 export interface ApiGuidePageGuidePage extends Struct.SingleTypeSchema {
   collectionName: 'guide_pages';
   info: {
+    description: '';
     displayName: 'Guide page';
     pluralName: 'guide-pages';
     singularName: 'guide-page';
@@ -585,7 +601,10 @@ export interface ApiGuidePageGuidePage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    ads_cards: Schema.Attribute.Component<'text-field.primary-ads-card', true>;
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -622,6 +641,10 @@ export interface ApiGuideGuide extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -721,6 +744,7 @@ export interface ApiHomeSecondCtaHomeSecondCta extends Struct.SingleTypeSchema {
 export interface ApiPokerPagePokerPage extends Struct.SingleTypeSchema {
   collectionName: 'poker_pages';
   info: {
+    description: '';
     displayName: 'Poker page';
     pluralName: 'poker-pages';
     singularName: 'poker-page';
@@ -729,7 +753,10 @@ export interface ApiPokerPagePokerPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    ads_cards: Schema.Attribute.Component<'text-field.primary-ads-card', true>;
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -766,6 +793,10 @@ export interface ApiPokerPoker extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -825,12 +856,14 @@ export interface ApiSlotPageSlotPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    ads_cards: Schema.Attribute.Component<'text-field.primary-ads-card', true>;
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
-    faq: Schema.Attribute.Component<'text-field.slot-faq', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -926,11 +959,16 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     casinos: Schema.Attribute.Relation<'oneToMany', 'api::casino.casino'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText & Schema.Attribute.Required;
+    faq: Schema.Attribute.Component<'text-field.slot-faq', true>;
     game_link: Schema.Attribute.Text & Schema.Attribute.Required;
     game_type: Schema.Attribute.Relation<
       'manyToOne',
@@ -991,7 +1029,10 @@ export interface ApiSportPageSportPage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    ads_cards: Schema.Attribute.Component<'text-field.primary-ads-card', true>;
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1028,6 +1069,10 @@ export interface ApiSportSport extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1074,6 +1119,50 @@ export interface ApiTermsAndConditionTermsAndCondition
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiWelcomeBonusCardWelcomeBonusCard
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'welcome_bonus_cards';
+  info: {
+    displayName: 'Welcome bonus card';
+    pluralName: 'welcome-bonus-cards';
+    singularName: 'welcome-bonus-card';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    bg_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    link: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    rating: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+        },
+        number
+      >;
+    text_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    with_deposit: Schema.Attribute.String & Schema.Attribute.Required;
+    without_deposit: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -1723,6 +1812,7 @@ declare module '@strapi/strapi' {
       'api::sport-page.sport-page': ApiSportPageSportPage;
       'api::sport.sport': ApiSportSport;
       'api::terms-and-condition.terms-and-condition': ApiTermsAndConditionTermsAndCondition;
+      'api::welcome-bonus-card.welcome-bonus-card': ApiWelcomeBonusCardWelcomeBonusCard;
       'api::welcome-bonus-page.welcome-bonus-page': ApiWelcomeBonusPageWelcomeBonusPage;
       'api::welcome-bonus.welcome-bonus': ApiWelcomeBonusWelcomeBonus;
       'api::who-we-are.who-we-are': ApiWhoWeAreWhoWeAre;

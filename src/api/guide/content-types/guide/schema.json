@@ -35,6 +35,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::guide.guide"
+    },
+    "ads_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::welcome-bonus-card.welcome-bonus-card"
     }
   }
 }

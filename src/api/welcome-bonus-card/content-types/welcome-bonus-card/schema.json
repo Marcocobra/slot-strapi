@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "welcome_bonus_cards",
+  "info": {
+    "singularName": "welcome-bonus-card",
+    "pluralName": "welcome-bonus-cards",
+    "displayName": "Welcome bonus card"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    },
+    "with_deposit": {
+      "type": "string",
+      "required": true
+    },
+    "without_deposit": {
+      "type": "string",
+      "required": true
+    },
+    "thumbnail": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "bg_color": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
+    },
+    "text_color": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
+    },
+    "rating": {
+      "type": "integer",
+      "max": 5
+    }
+  }
+}
