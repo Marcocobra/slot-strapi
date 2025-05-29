@@ -844,6 +844,48 @@ export interface ApiPrivacyPolicyPrivacyPolicy extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiSlotContentPageSlotContentPage
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'slot_content_pages';
+  info: {
+    description: '';
+    displayName: 'slot-content-page';
+    pluralName: 'slot-content-pages';
+    singularName: 'slot-content-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::slot-content-page.slot-content-page'
+    > &
+      Schema.Attribute.Private;
+    meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    sidebar_ads_cards: Schema.Attribute.Component<
+      'text-field.sidebar-ads-cards',
+      true
+    >;
+    slots: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
+    slug: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSlotPageSlotPage extends Struct.SingleTypeSchema {
   collectionName: 'slot_pages';
   info: {
@@ -1002,6 +1044,10 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
         },
         number
       >;
+    slot_content_page: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::slot-content-page.slot-content-page'
+    >;
     slot_preview: Schema.Attribute.Media<'files' | 'videos', true>;
     slot_theme: Schema.Attribute.Relation<
       'manyToOne',
@@ -1805,6 +1851,7 @@ declare module '@strapi/strapi' {
       'api::poker-page.poker-page': ApiPokerPagePokerPage;
       'api::poker.poker': ApiPokerPoker;
       'api::privacy-policy.privacy-policy': ApiPrivacyPolicyPrivacyPolicy;
+      'api::slot-content-page.slot-content-page': ApiSlotContentPageSlotContentPage;
       'api::slot-page.slot-page': ApiSlotPageSlotPage;
       'api::slot-provider.slot-provider': ApiSlotProviderSlotProvider;
       'api::slot-theme.slot-theme': ApiSlotThemeSlotTheme;
