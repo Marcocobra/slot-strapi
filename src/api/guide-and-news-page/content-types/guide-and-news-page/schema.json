@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "guide_and_news_pages",
+  "info": {
+    "singularName": "guide-and-news-page",
+    "pluralName": "guide-and-news-pages",
+    "displayName": "Guide and news page",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "guides": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::guide.guide",
+      "mappedBy": "guide_and_news_page"
+    },
+    "meta_keyword": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.repeatable"
+    },
+    "slug": {
+      "type": "string",
+      "required": true
+    },
+    "sidebar_ads_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.sidebar-ads-cards"
+    },
+    "ads_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::welcome-bonus-card.welcome-bonus-card"
+    },
+    "featured_guide": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::guide.guide"
+    },
+    "meta_title": {
+      "type": "string"
+    }
+  }
+}
