@@ -112,6 +112,18 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::welcome-bonus-card.welcome-bonus-card"
+    },
+    "slot_content_page": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::slot-content-page.slot-content-page",
+      "inversedBy": "slots"
+    },
+    "news_and_preview": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::news-and-preview.news-and-preview",
+      "inversedBy": "slots"
     }
   }
 }

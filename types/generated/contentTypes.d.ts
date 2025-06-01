@@ -589,6 +589,50 @@ export interface ApiGameTypeGameType extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiGuideAndNewsPageGuideAndNewsPage
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'guide_and_news_pages';
+  info: {
+    description: '';
+    displayName: 'Guide and news page';
+    pluralName: 'guide-and-news-pages';
+    singularName: 'guide-and-news-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText & Schema.Attribute.Required;
+    featured_guide: Schema.Attribute.Relation<'oneToOne', 'api::guide.guide'>;
+    guides: Schema.Attribute.Relation<'oneToMany', 'api::guide.guide'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::guide-and-news-page.guide-and-news-page'
+    > &
+      Schema.Attribute.Private;
+    meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
+    meta_title: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    sidebar_ads_cards: Schema.Attribute.Component<
+      'text-field.sidebar-ads-cards',
+      true
+    >;
+    slug: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGuidePageGuidePage extends Struct.SingleTypeSchema {
   collectionName: 'guide_pages';
   info: {
@@ -649,6 +693,10 @@ export interface ApiGuideGuide extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText;
+    guide_and_news_page: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::guide-and-news-page.guide-and-news-page'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::guide.guide'> &
       Schema.Attribute.Private;
@@ -735,6 +783,47 @@ export interface ApiHomeSecondCtaHomeSecondCta extends Struct.SingleTypeSchema {
     text_color: Schema.Attribute.String &
       Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiNewsAndPreviewNewsAndPreview
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'news_and_previews';
+  info: {
+    displayName: 'News and preview';
+    pluralName: 'news-and-previews';
+    singularName: 'news-and-preview';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::news-and-preview.news-and-preview'
+    > &
+      Schema.Attribute.Private;
+    meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    sidebar_ads_cards: Schema.Attribute.Component<
+      'text-field.sidebar-ads-cards',
+      true
+    >;
+    slots: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
+    slug: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -838,6 +927,48 @@ export interface ApiPrivacyPolicyPrivacyPolicy extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSlotContentPageSlotContentPage
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'slot_content_pages';
+  info: {
+    description: '';
+    displayName: 'slot-content-page';
+    pluralName: 'slot-content-pages';
+    singularName: 'slot-content-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::slot-content-page.slot-content-page'
+    > &
+      Schema.Attribute.Private;
+    meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
+    publishedAt: Schema.Attribute.DateTime;
+    sidebar_ads_cards: Schema.Attribute.Component<
+      'text-field.sidebar-ads-cards',
+      true
+    >;
+    slots: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
+    slug: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -980,6 +1111,10 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     max_win: Schema.Attribute.Decimal;
     meta_description: Schema.Attribute.Text;
     meta_title: Schema.Attribute.String;
+    news_and_preview: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::news-and-preview.news-and-preview'
+    >;
     pros: Schema.Attribute.RichText & Schema.Attribute.Required;
     provider: Schema.Attribute.Relation<
       'manyToOne',
@@ -1002,6 +1137,10 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
         },
         number
       >;
+    slot_content_page: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::slot-content-page.slot-content-page'
+    >;
     slot_preview: Schema.Attribute.Media<'files' | 'videos', true>;
     slot_theme: Schema.Attribute.Relation<
       'manyToOne',
@@ -1798,13 +1937,16 @@ declare module '@strapi/strapi' {
       'api::casino.casino': ApiCasinoCasino;
       'api::cookie-policy.cookie-policy': ApiCookiePolicyCookiePolicy;
       'api::game-type.game-type': ApiGameTypeGameType;
+      'api::guide-and-news-page.guide-and-news-page': ApiGuideAndNewsPageGuideAndNewsPage;
       'api::guide-page.guide-page': ApiGuidePageGuidePage;
       'api::guide.guide': ApiGuideGuide;
       'api::home-first-cta.home-first-cta': ApiHomeFirstCtaHomeFirstCta;
       'api::home-second-cta.home-second-cta': ApiHomeSecondCtaHomeSecondCta;
+      'api::news-and-preview.news-and-preview': ApiNewsAndPreviewNewsAndPreview;
       'api::poker-page.poker-page': ApiPokerPagePokerPage;
       'api::poker.poker': ApiPokerPoker;
       'api::privacy-policy.privacy-policy': ApiPrivacyPolicyPrivacyPolicy;
+      'api::slot-content-page.slot-content-page': ApiSlotContentPageSlotContentPage;
       'api::slot-page.slot-page': ApiSlotPageSlotPage;
       'api::slot-provider.slot-provider': ApiSlotProviderSlotProvider;
       'api::slot-theme.slot-theme': ApiSlotThemeSlotTheme;

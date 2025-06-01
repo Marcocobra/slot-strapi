@@ -40,6 +40,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::welcome-bonus-card.welcome-bonus-card"
+    },
+    "guide_and_news_page": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::guide-and-news-page.guide-and-news-page",
+      "inversedBy": "guides"
     }
   }
 }
