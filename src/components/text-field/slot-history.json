@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_text_field_slot_histories",
+  "info": {
+    "displayName": "Slot history",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "wheels_result": {
+      "type": "biginteger",
+      "required": true
+    },
+    "slot_result": {
+      "type": "biginteger",
+      "required": true
+    },
+    "slot_result_number": {
+      "type": "biginteger",
+      "required": true
+    },
+    "win_multiplier": {
+      "type": "biginteger",
+      "required": true
+    },
+    "dealer": {
+      "type": "string",
+      "required": true
+    },
+    "player": {
+      "type": "string",
+      "required": true
+    },
+    "spin_hour": {
+      "type": "datetime",
+      "required": true
+    }
+  }
+}

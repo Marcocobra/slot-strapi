@@ -789,10 +789,54 @@ export interface ApiHomeSecondCtaHomeSecondCta extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiLiveStatisticLiveStatistic
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'live_statistics';
+  info: {
+    description: '';
+    displayName: 'Live statistics';
+    pluralName: 'live-statistics';
+    singularName: 'live-statistic';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::live-statistic.live-statistic'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    secondary_description: Schema.Attribute.RichText;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    spin_cards: Schema.Attribute.Component<'text-field.spin-card', true>;
+    spin_histories: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::spin-history.spin-history'
+    >;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    video: Schema.Attribute.Media<'videos'>;
+  };
+}
+
 export interface ApiNewsAndPreviewNewsAndPreview
   extends Struct.CollectionTypeSchema {
   collectionName: 'news_and_previews';
   info: {
+    description: '';
     displayName: 'News and preview';
     pluralName: 'news-and-previews';
     singularName: 'news-and-preview';
@@ -816,6 +860,7 @@ export interface ApiNewsAndPreviewNewsAndPreview
     > &
       Schema.Attribute.Private;
     meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
+    meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     sidebar_ads_cards: Schema.Attribute.Component<
       'text-field.sidebar-ads-cards',
@@ -938,7 +983,7 @@ export interface ApiSlotContentPageSlotContentPage
   collectionName: 'slot_content_pages';
   info: {
     description: '';
-    displayName: 'slot-content-page';
+    displayName: 'Slot content page';
     pluralName: 'slot-content-pages';
     singularName: 'slot-content-page';
   };
@@ -961,6 +1006,7 @@ export interface ApiSlotContentPageSlotContentPage
     > &
       Schema.Attribute.Private;
     meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
+    meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     sidebar_ads_cards: Schema.Attribute.Component<
       'text-field.sidebar-ads-cards',
@@ -1153,6 +1199,44 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     volatility: Schema.Attribute.Enumeration<['high', 'medium', 'low']>;
+  };
+}
+
+export interface ApiSpinHistorySpinHistory extends Struct.CollectionTypeSchema {
+  collectionName: 'spin_histories';
+  info: {
+    displayName: 'Spin history';
+    pluralName: 'spin-histories';
+    singularName: 'spin-history';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dealer: Schema.Attribute.String & Schema.Attribute.Required;
+    live_statistics: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::live-statistic.live-statistic'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::spin-history.spin-history'
+    > &
+      Schema.Attribute.Private;
+    player: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    slot_result: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    slot_result_number: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    spin_hour: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    wheels_result: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    win_multiplier: Schema.Attribute.BigInteger & Schema.Attribute.Required;
   };
 }
 
@@ -1942,6 +2026,7 @@ declare module '@strapi/strapi' {
       'api::guide.guide': ApiGuideGuide;
       'api::home-first-cta.home-first-cta': ApiHomeFirstCtaHomeFirstCta;
       'api::home-second-cta.home-second-cta': ApiHomeSecondCtaHomeSecondCta;
+      'api::live-statistic.live-statistic': ApiLiveStatisticLiveStatistic;
       'api::news-and-preview.news-and-preview': ApiNewsAndPreviewNewsAndPreview;
       'api::poker-page.poker-page': ApiPokerPagePokerPage;
       'api::poker.poker': ApiPokerPoker;
@@ -1951,6 +2036,7 @@ declare module '@strapi/strapi' {
       'api::slot-provider.slot-provider': ApiSlotProviderSlotProvider;
       'api::slot-theme.slot-theme': ApiSlotThemeSlotTheme;
       'api::slot.slot': ApiSlotSlot;
+      'api::spin-history.spin-history': ApiSpinHistorySpinHistory;
       'api::sport-page.sport-page': ApiSportPageSportPage;
       'api::sport.sport': ApiSportSport;
       'api::terms-and-condition.terms-and-condition': ApiTermsAndConditionTermsAndCondition;

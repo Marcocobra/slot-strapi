@@ -86,6 +86,40 @@ export interface TextFieldSlotFaq extends Struct.ComponentSchema {
   };
 }
 
+export interface TextFieldSlotHistory extends Struct.ComponentSchema {
+  collectionName: 'components_text_field_slot_histories';
+  info: {
+    description: '';
+    displayName: 'Slot history';
+  };
+  attributes: {
+    dealer: Schema.Attribute.String & Schema.Attribute.Required;
+    player: Schema.Attribute.String & Schema.Attribute.Required;
+    slot_result: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    slot_result_number: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    spin_hour: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    wheels_result: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    win_multiplier: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+  };
+}
+
+export interface TextFieldSpinCard extends Struct.ComponentSchema {
+  collectionName: 'components_text_field_spin_cards';
+  info: {
+    description: '';
+    displayName: 'Spin card';
+  };
+  attributes: {
+    number: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    percentage: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    spin: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    successful: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    time_frame: Schema.Attribute.BigInteger;
+    total: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    total_extractions: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -94,6 +128,8 @@ declare module '@strapi/strapi' {
       'text-field.sidebar-ads-cards': TextFieldSidebarAdsCards;
       'text-field.sidebar-cards-details': TextFieldSidebarCardsDetails;
       'text-field.slot-faq': TextFieldSlotFaq;
+      'text-field.slot-history': TextFieldSlotHistory;
+      'text-field.spin-card': TextFieldSpinCard;
     }
   }
 }

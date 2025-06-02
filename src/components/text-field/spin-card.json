@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_text_field_spin_cards",
+  "info": {
+    "displayName": "Spin card",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "number": {
+      "type": "biginteger",
+      "required": true
+    },
+    "spin": {
+      "type": "biginteger",
+      "required": true
+    },
+    "percentage": {
+      "type": "decimal",
+      "required": true
+    },
+    "time_frame": {
+      "type": "biginteger"
+    },
+    "total_extractions": {
+      "type": "biginteger",
+      "required": true
+    },
+    "successful": {
+      "type": "biginteger",
+      "required": true
+    },
+    "total": {
+      "type": "biginteger",
+      "required": true
+    }
+  }
+}
