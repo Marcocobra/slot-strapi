@@ -1145,6 +1145,10 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText & Schema.Attribute.Required;
+    description_ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     faq: Schema.Attribute.Component<'text-field.slot-faq', true>;
     game_link: Schema.Attribute.Text & Schema.Attribute.Required;
     game_type: Schema.Attribute.Relation<
@@ -1183,6 +1187,10 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
         },
         number
       >;
+    sidebar_bonus_ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     slot_content_page: Schema.Attribute.Relation<
       'manyToOne',
       'api::slot-content-page.slot-content-page'

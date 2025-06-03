@@ -124,6 +124,16 @@
       "relation": "manyToOne",
       "target": "api::news-and-preview.news-and-preview",
       "inversedBy": "slots"
+    },
+    "description_ads_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::welcome-bonus-card.welcome-bonus-card"
+    },
+    "sidebar_bonus_ads_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::welcome-bonus-card.welcome-bonus-card"
     }
   }
 }
