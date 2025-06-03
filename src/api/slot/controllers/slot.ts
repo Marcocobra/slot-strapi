@@ -1,7 +1,3 @@
-/**
- * slot controller
- */
-
 import { factories } from "@strapi/strapi";
 
 export default factories.createCoreController(
@@ -10,108 +6,73 @@ export default factories.createCoreController(
     async find(ctx) {
       const searchQuery = ctx.query.query as string | undefined;
 
-      const customQuery = { ...ctx.query };
-
-      delete customQuery.query;
-
-      ctx.query = customQuery;
-
-      const { data, meta } = await super.find(ctx);
-
-      if (searchQuery) {
-        const filteredData = data.filter((item: any) => {
-          const slot = item;
-
-          const numericQuery = parseFloat(searchQuery);
-          const isNumeric = !isNaN(numericQuery) && isFinite(numericQuery);
-
-          const isRtpQuery = searchQuery.includes("%");
-
-          const volatilityLevels = ["low", "medium", "high"];
-          const isVolatilityQuery = volatilityLevels.includes(
-            searchQuery.toLowerCase()
-          );
-
-          if (
-            slot.title &&
-            typeof slot.title === "string" &&
-            slot.title.toLowerCase().includes(searchQuery.toLowerCase())
-          ) {
-            return true;
-          }
-
-          if (
-            slot.provider &&
-            typeof slot.provider === "string" &&
-            slot.provider.toLowerCase().includes(searchQuery.toLowerCase())
-          ) {
-            return true;
-          }
-
-          if (isRtpQuery && slot.rtp && typeof slot.rtp === "number") {
-            const queryRtp = parseFloat(searchQuery.replace("%", ""));
-
-            if (Math.abs(slot.rtp - queryRtp) <= 0.5) {
-              return true;
-            }
-          }
-
-          if (isNumeric && slot.rtp && typeof slot.rtp === "number") {
-            if (
-              numericQuery >= 1 &&
-              numericQuery <= 100 &&
-              Math.abs(slot.rtp - numericQuery) <= 0.5
-            ) {
-              return true;
-            }
-          }
-
-          if (
-            isVolatilityQuery &&
-            slot.volatility &&
-            typeof slot.volatility === "string" &&
-            slot.volatility.toLowerCase() === searchQuery.toLowerCase()
-          ) {
-            return true;
-          }
-
-          if (
-            slot.payline_system &&
-            typeof slot.payline_system === "string" &&
-            slot.payline_system
-              .toLowerCase()
-              .includes(searchQuery.toLowerCase())
-          ) {
-            return true;
-          }
-
-          if (
-            slot.slot_theme &&
-            slot.slot_theme.title &&
-            typeof slot.slot_theme.title === "string" &&
-            slot.slot_theme.title
-              .toLowerCase()
-              .includes(searchQuery.toLowerCase())
-          ) {
-            return true;
-          }
-
-          return false;
-        });
-
-        return {
-          data: filteredData,
-          meta: {
-            ...meta,
-            pagination: {
-              ...meta.pagination,
-              total: filteredData.length,
-            },
-          },
-        };
+      if (!searchQuery) {
+        return await super.find(ctx);
       }
 
-      return { data, meta };
+      const page = parseInt(
+        (ctx.query["pagination[page]"] as string) || "1",
+        10
+      );
+      const pageSize = parseInt(
+        (ctx.query["pagination[pageSize]"] as string) || "10",
+        10
+      );
+      const start = (page - 1) * pageSize;
+
+      const fullData = await strapi.entityService.findMany("api::slot.slot", {
+        populate: {
+          thumbnail: true,
+          slot_theme: true,
+          provider: { populate: { provider_logo: true } },
+          casinos: { populate: { thumbnail: true } },
+          faq: true,
+          ads_cards: { populate: { thumbnail: true } },
+          slot_content_page: true,
+          news_and_preview: true,
+          related_slots: {
+            populate: {
+              thumbnail: true,
+              slot_theme: true,
+              slot_content_page: true,
+            },
+          },
+        },
+        limit: 2000,
+      });
+
+      const filtered = fullData.filter((slot: any) => {
+        const q = searchQuery.toLowerCase();
+        const numericQuery = parseFloat(searchQuery.replace("%", ""));
+        const isNumeric = !isNaN(numericQuery);
+        const isRtpQuery = searchQuery.includes("%");
+        const isVolatility = ["low", "medium", "high"].includes(q);
+
+        return (
+          slot.title?.toLowerCase().includes(q) ||
+          (typeof slot.provider === "string" &&
+            slot.provider.toLowerCase().includes(q)) ||
+          slot.payline_system?.toLowerCase().includes(q) ||
+          slot.slot_theme?.title?.toLowerCase().includes(q) ||
+          (isVolatility && slot.volatility?.toLowerCase() === q) ||
+          (isRtpQuery && Math.abs(slot.rtp - numericQuery) <= 0.5) ||
+          (isNumeric && Math.abs(slot.rtp - numericQuery) <= 0.5)
+        );
+      });
+
+      const paginated = filtered.slice(start, start + pageSize);
+
+      return {
+        data: paginated,
+        meta: {
+          pagination: {
+            page,
+            pageSize,
+            pageCount: Math.ceil(filtered.length / pageSize),
+            total: filtered.length,
+          },
+        },
+      };
     },
   })
 );

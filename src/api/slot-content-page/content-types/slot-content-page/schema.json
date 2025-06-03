@@ -4,7 +4,7 @@
   "info": {
     "singularName": "slot-content-page",
     "pluralName": "slot-content-pages",
-    "displayName": "slot-content-page",
+    "displayName": "Slot content page",
     "description": ""
   },
   "options": {
@@ -42,6 +42,9 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::welcome-bonus-card.welcome-bonus-card"
+    },
+    "meta_title": {
+      "type": "string"
     }
   }
 }

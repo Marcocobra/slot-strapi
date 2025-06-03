@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "live_statistics",
+  "info": {
+    "singularName": "live-statistic",
+    "pluralName": "live-statistics",
+    "displayName": "Live statistics",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "secondary_description": {
+      "type": "richtext"
+    },
+    "video": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "videos"
+      ]
+    },
+    "spin_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.spin-card"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "ads_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::welcome-bonus-card.welcome-bonus-card"
+    },
+    "spin_histories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::spin-history.spin-history",
+      "mappedBy": "live_statistics"
+    }
+  }
+}

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "news-and-preview",
     "pluralName": "news-and-previews",
-    "displayName": "News and preview"
+    "displayName": "News and preview",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -42,6 +43,9 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::welcome-bonus-card.welcome-bonus-card"
+    },
+    "meta_title": {
+      "type": "string"
     }
   }
 }

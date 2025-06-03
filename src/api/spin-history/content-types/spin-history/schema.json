@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "spin_histories",
+  "info": {
+    "singularName": "spin-history",
+    "pluralName": "spin-histories",
+    "displayName": "Spin history"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "wheels_result": {
+      "type": "biginteger",
+      "required": true
+    },
+    "slot_result": {
+      "type": "biginteger",
+      "required": true
+    },
+    "slot_result_number": {
+      "type": "biginteger",
+      "required": true
+    },
+    "win_multiplier": {
+      "type": "biginteger",
+      "required": true
+    },
+    "dealer": {
+      "type": "string",
+      "required": true
+    },
+    "player": {
+      "type": "string",
+      "required": true
+    },
+    "spin_hour": {
+      "type": "datetime",
+      "required": true
+    },
+    "live_statistics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::live-statistic.live-statistic",
+      "inversedBy": "spin_histories"
+    }
+  }
+}
