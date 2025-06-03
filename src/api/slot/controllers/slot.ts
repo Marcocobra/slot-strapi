@@ -38,7 +38,7 @@ export default factories.createCoreController(
             },
           },
         },
-        limit: 1000,
+        limit: 2000,
       });
 
       const filtered = fullData.filter((slot: any) => {
