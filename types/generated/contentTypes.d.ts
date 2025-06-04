@@ -1195,7 +1195,6 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
       'manyToOne',
       'api::slot-content-page.slot-content-page'
     >;
-    slot_preview: Schema.Attribute.Media<'files' | 'videos', true>;
     slot_theme: Schema.Attribute.Relation<
       'manyToOne',
       'api::slot-theme.slot-theme'

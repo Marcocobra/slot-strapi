@@ -85,15 +85,6 @@
       "target": "api::game-type.game-type",
       "inversedBy": "slots"
     },
-    "slot_preview": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "files",
-        "videos"
-      ]
-    },
     "provider": {
       "type": "relation",
       "relation": "manyToOne",
