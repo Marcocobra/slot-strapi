@@ -1,0 +1,51 @@
+{
+  "kind": "singleType",
+  "collectionName": "second_countdown_sections",
+  "info": {
+    "singularName": "second-countdown-section",
+    "pluralName": "second-countdown-sections",
+    "displayName": "Second countdown section",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "link": {
+      "type": "string"
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "countdown": {
+      "type": "datetime",
+      "required": true
+    },
+    "bg_color": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
+    },
+    "text_color": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
+    },
+    "button_text": {
+      "type": "string"
+    }
+  }
+}

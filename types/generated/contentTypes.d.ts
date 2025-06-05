@@ -559,6 +559,45 @@ export interface ApiCookiePolicyCookiePolicy extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiFirstCountdownSectionFirstCountdownSection
+  extends Struct.SingleTypeSchema {
+  collectionName: 'first_countdown_sections';
+  info: {
+    description: '';
+    displayName: 'First countdown section';
+    pluralName: 'first-countdown-sections';
+    singularName: 'first-countdown-section';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    bg_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    button_text: Schema.Attribute.String;
+    countdown: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText & Schema.Attribute.Required;
+    link: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::first-countdown-section.first-countdown-section'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    text_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGameTypeGameType extends Struct.CollectionTypeSchema {
   collectionName: 'game_types';
   info: {
@@ -972,6 +1011,45 @@ export interface ApiPrivacyPolicyPrivacyPolicy extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSecondCountdownSectionSecondCountdownSection
+  extends Struct.SingleTypeSchema {
+  collectionName: 'second_countdown_sections';
+  info: {
+    description: '';
+    displayName: 'Second countdown section';
+    pluralName: 'second-countdown-sections';
+    singularName: 'second-countdown-section';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    bg_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    button_text: Schema.Attribute.String;
+    countdown: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText & Schema.Attribute.Required;
+    link: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::second-countdown-section.second-countdown-section'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    text_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -2027,6 +2105,7 @@ declare module '@strapi/strapi' {
       'api::casino-page.casino-page': ApiCasinoPageCasinoPage;
       'api::casino.casino': ApiCasinoCasino;
       'api::cookie-policy.cookie-policy': ApiCookiePolicyCookiePolicy;
+      'api::first-countdown-section.first-countdown-section': ApiFirstCountdownSectionFirstCountdownSection;
       'api::game-type.game-type': ApiGameTypeGameType;
       'api::guide-and-news-page.guide-and-news-page': ApiGuideAndNewsPageGuideAndNewsPage;
       'api::guide-page.guide-page': ApiGuidePageGuidePage;
@@ -2038,6 +2117,7 @@ declare module '@strapi/strapi' {
       'api::poker-page.poker-page': ApiPokerPagePokerPage;
       'api::poker.poker': ApiPokerPoker;
       'api::privacy-policy.privacy-policy': ApiPrivacyPolicyPrivacyPolicy;
+      'api::second-countdown-section.second-countdown-section': ApiSecondCountdownSectionSecondCountdownSection;
       'api::slot-content-page.slot-content-page': ApiSlotContentPageSlotContentPage;
       'api::slot-page.slot-page': ApiSlotPageSlotPage;
       'api::slot-provider.slot-provider': ApiSlotProviderSlotProvider;
