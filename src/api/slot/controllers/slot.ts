@@ -4,12 +4,8 @@ export default factories.createCoreController(
   'api::slot.slot',
   ({ strapi }) => ({
     async find(ctx) {
-      const searchQuery = ctx.query.query as string | undefined;
-
-      if (!searchQuery) {
-        return await super.find(ctx);
-      }
-
+      const searchQuery =
+        ctx.query.query?.toString().trim().toLowerCase() || '';
       const page = parseInt(
         (ctx.query['pagination[page]'] as string) || '1',
         10
@@ -20,56 +16,106 @@ export default factories.createCoreController(
       );
       const start = (page - 1) * pageSize;
 
-      const fullData = await strapi.entityService.findMany('api::slot.slot', {
-        populate: {
-          thumbnail: true,
-          slot_theme: true,
-          provider: { populate: { provider_logo: true } },
-          casinos: { populate: { thumbnail: true } },
-          faq: true,
-          ads_cards: { populate: { thumbnail: true } },
-          slot_content_page: true,
-          news_and_preview: true,
-          related_slots: {
-            populate: {
-              thumbnail: true,
-              slot_theme: true,
-              slot_content_page: true,
-            },
+      // Base population for all queries
+      const populate = {
+        thumbnail: true,
+        slot_theme: true,
+        provider: { populate: { provider_logo: true } },
+        casinos: { populate: { thumbnail: true } },
+        faq: true,
+        ads_cards: { populate: { thumbnail: true } },
+        slot_content_page: true,
+        news_and_preview: true,
+        related_slots: {
+          populate: {
+            thumbnail: true,
+            slot_theme: true,
+            slot_content_page: true,
           },
         },
-        limit: 2000,
-      });
+      };
 
-      const filtered = fullData.filter((slot: any) => {
-        const q = searchQuery.toLowerCase();
-        const numericQuery = parseFloat(searchQuery.replace('%', ''));
-        const isNumeric = !isNaN(numericQuery);
-        const isRtpQuery = searchQuery.includes('%');
-        const isVolatility = ['low', 'medium', 'high'].includes(q);
+      // If no search query, return paginated results
+      if (!searchQuery) {
+        const { data, meta } = await super.find(ctx);
+        return { data, meta };
+      }
 
-        return (
-          slot.title?.toLowerCase().includes(q) ||
-          (typeof slot.provider === 'string' &&
-            slot.provider.toLowerCase().includes(q)) ||
-          slot.payline_system?.toLowerCase().includes(q) ||
-          slot.slot_theme?.title?.toLowerCase().includes(q) ||
-          (isVolatility && slot.volatility?.toLowerCase() === q) ||
-          (isRtpQuery && Math.abs(slot.rtp - numericQuery) <= 0.5) ||
-          (isNumeric && Math.abs(slot.rtp - numericQuery) <= 0.5)
-        );
-      });
+      // Parse query for specific types
+      const numericQuery = parseFloat(searchQuery.replace(/[^0-9.]/g, '')); // Extract numeric part
+      const isNumeric = !isNaN(numericQuery);
+      const isRtpQuery = searchQuery.includes('%');
+      const isMaxWinQuery = searchQuery.toLowerCase().includes('x');
+      const isVolatilityQuery = searchQuery.match(
+        /(volatilità\s+)?(low|medium|high|alta|media|bassa)/i
+      );
+      const keywordQueries = [
+        'jackpot',
+        'megaways',
+        'slot da bar',
+        'slot gallina',
+        'slot libri',
+      ];
 
-      const paginated = filtered.slice(start, start + pageSize);
+      // Build filters with explicit typing to avoid TS errors
+      const filters: any = {
+        $or: [
+          { title: { $containsi: searchQuery } }, // Slot name (partial match)
+          { provider: { provider_name: { $containsi: searchQuery } } }, // Provider name
+          { slot_theme: { title: { $containsi: searchQuery } } }, // Slot theme
+        ],
+      };
+
+      // Handle max win query (e.g., "5000x")
+      if (isMaxWinQuery && isNumeric) {
+        filters.$or.push({ max_win: { $gte: numericQuery } });
+      }
+
+      // Handle volatility query (e.g., "volatilità alta" or "high")
+      if (isVolatilityQuery) {
+        const volatilityMap: { [key: string]: string } = {
+          alta: 'high',
+          media: 'medium',
+          bassa: 'low',
+          high: 'high',
+          medium: 'medium',
+          low: 'low',
+        };
+        const volatility = volatilityMap[isVolatilityQuery[2].toLowerCase()];
+        filters.$or.push({ volatility: { $eq: volatility } });
+      }
+
+      // Handle RTP query (e.g., "RTP 96%")
+      if (isRtpQuery && isNumeric) {
+        filters.$or.push({ rtp: { $gte: numericQuery } });
+      }
+
+      // Handle keyword searches (e.g., "Jackpot", "Megaways")
+      if (keywordQueries.some((keyword) => searchQuery.includes(keyword))) {
+        filters.$or.push({ title: { $containsi: searchQuery } });
+      }
+
+      // Fetch filtered and paginated data
+      const [slots, total] = await Promise.all([
+        strapi.entityService.findMany('api::slot.slot', {
+          filters,
+          populate,
+          pagination: { start, limit: pageSize },
+          sort: isRtpQuery ? { rtp: 'asc' } : { title: 'asc' },
+        }),
+        strapi.entityService.count('api::slot.slot', {
+          filters,
+        }),
+      ]);
 
       return {
-        data: paginated,
+        data: slots,
         meta: {
           pagination: {
             page,
             pageSize,
-            pageCount: Math.ceil(filtered.length / pageSize),
-            total: filtered.length,
+            pageCount: Math.ceil(total / pageSize),
+            total,
           },
         },
       };
