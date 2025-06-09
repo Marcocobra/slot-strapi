@@ -44,18 +44,12 @@ export default factories.createCoreController(
       // Parse query for specific types
       const numericQuery = parseFloat(searchQuery.replace(/[^0-9.]/g, '')); // Extract numeric part
       const isNumeric = !isNaN(numericQuery);
-      const isRtpQuery = searchQuery.includes('%');
+      const isRtpQuery =
+        searchQuery.includes('%') || searchQuery.includes('rtp');
       const isMaxWinQuery = searchQuery.toLowerCase().includes('x');
       const isVolatilityQuery = searchQuery.match(
         /(volatilità\s+)?(low|medium|high|alta|media|bassa)/i
       );
-      const keywordQueries = [
-        'jackpot',
-        'megaways',
-        'slot da bar',
-        'slot gallina',
-        'slot libri',
-      ];
 
       // Build filters with explicit typing to avoid TS errors
       const filters: any = {
@@ -85,14 +79,9 @@ export default factories.createCoreController(
         filters.$or.push({ volatility: { $eq: volatility } });
       }
 
-      // Handle RTP query (e.g., "RTP 96%")
-      if (isRtpQuery && isNumeric) {
-        filters.$or.push({ rtp: { $gte: numericQuery } });
-      }
-
-      // Handle keyword searches (e.g., "Jackpot", "Megaways")
-      if (keywordQueries.some((keyword) => searchQuery.includes(keyword))) {
-        filters.$or.push({ title: { $containsi: searchQuery } });
+      // Handle RTP query (e.g., "RTP 97%" or "97%")
+      if (isRtpQuery && isNumeric && numericQuery >= 0 && numericQuery <= 100) {
+        filters.$or.push({ rtp: { $eq: numericQuery } });
       }
 
       // Fetch filtered and paginated data
