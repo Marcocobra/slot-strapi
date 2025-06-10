@@ -1,10 +1,10 @@
 {
-  "kind": "collectionType",
-  "collectionName": "news_and_previews",
+  "kind": "singleType",
+  "collectionName": "new_slots",
   "info": {
-    "singularName": "news-and-preview",
-    "pluralName": "news-and-previews",
-    "displayName": "News and preview",
+    "singularName": "new-slot",
+    "pluralName": "new-slots",
+    "displayName": "New slots",
     "description": ""
   },
   "options": {
@@ -17,18 +17,15 @@
     },
     "description": {
       "type": "richtext",
-      "required": true
-    },
-    "slots": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::slot.slot",
-      "mappedBy": "news_and_preview"
+      "required": false
     },
     "meta_keyword": {
       "type": "component",
       "repeatable": true,
       "component": "text-field.repeatable"
+    },
+    "meta_title": {
+      "type": "string"
     },
     "sidebar_ads_cards": {
       "type": "component",
@@ -39,13 +36,6 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::welcome-bonus-card.welcome-bonus-card"
-    },
-    "meta_title": {
-      "type": "string"
-    },
-    "slug": {
-      "type": "uid",
-      "targetField": "title"
     }
   }
 }

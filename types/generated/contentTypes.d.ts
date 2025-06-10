@@ -559,6 +559,45 @@ export interface ApiCookiePolicyCookiePolicy extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiFirstCountdownSectionFirstCountdownSection
+  extends Struct.SingleTypeSchema {
+  collectionName: 'first_countdown_sections';
+  info: {
+    description: '';
+    displayName: 'First countdown section';
+    pluralName: 'first-countdown-sections';
+    singularName: 'first-countdown-section';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    bg_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    button_text: Schema.Attribute.String;
+    countdown: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText & Schema.Attribute.Required;
+    link: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::first-countdown-section.first-countdown-section'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    text_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGameTypeGameType extends Struct.CollectionTypeSchema {
   collectionName: 'game_types';
   info: {
@@ -832,6 +871,46 @@ export interface ApiLiveStatisticLiveStatistic
   };
 }
 
+export interface ApiNewSlotNewSlot extends Struct.SingleTypeSchema {
+  collectionName: 'new_slots';
+  info: {
+    description: '';
+    displayName: 'New slots';
+    pluralName: 'new-slots';
+    singularName: 'new-slot';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::new-slot.new-slot'
+    > &
+      Schema.Attribute.Private;
+    meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
+    meta_title: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    sidebar_ads_cards: Schema.Attribute.Component<
+      'text-field.sidebar-ads-cards',
+      true
+    >;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiNewsAndPreviewNewsAndPreview
   extends Struct.CollectionTypeSchema {
   collectionName: 'news_and_previews';
@@ -867,7 +946,7 @@ export interface ApiNewsAndPreviewNewsAndPreview
       true
     >;
     slots: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
-    slug: Schema.Attribute.String & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -978,6 +1057,45 @@ export interface ApiPrivacyPolicyPrivacyPolicy extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiSecondCountdownSectionSecondCountdownSection
+  extends Struct.SingleTypeSchema {
+  collectionName: 'second_countdown_sections';
+  info: {
+    description: '';
+    displayName: 'Second countdown section';
+    pluralName: 'second-countdown-sections';
+    singularName: 'second-countdown-section';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    bg_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    button_text: Schema.Attribute.String;
+    countdown: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText & Schema.Attribute.Required;
+    link: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::second-countdown-section.second-countdown-section'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    text_color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSlotContentPageSlotContentPage
   extends Struct.CollectionTypeSchema {
   collectionName: 'slot_content_pages';
@@ -1014,6 +1132,85 @@ export interface ApiSlotContentPageSlotContentPage
     >;
     slots: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
     slug: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSlotGratiSlotGrati extends Struct.SingleTypeSchema {
+  collectionName: 'slot_gratis';
+  info: {
+    description: '';
+    displayName: 'Slot gratis';
+    pluralName: 'slot-gratis';
+    singularName: 'slot-grati';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::slot-grati.slot-grati'
+    > &
+      Schema.Attribute.Private;
+    meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
+    meta_title: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    sidebar_ads_cards: Schema.Attribute.Component<
+      'text-field.sidebar-ads-cards',
+      true
+    >;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSlotOnlineSlotOnline extends Struct.SingleTypeSchema {
+  collectionName: 'slot_onlines';
+  info: {
+    displayName: 'Slot online';
+    pluralName: 'slot-onlines';
+    singularName: 'slot-online';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::slot-online.slot-online'
+    > &
+      Schema.Attribute.Private;
+    meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
+    meta_title: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    sidebar_ads_cards: Schema.Attribute.Component<
+      'text-field.sidebar-ads-cards',
+      true
+    >;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1134,6 +1331,7 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
   };
   options: {
     draftAndPublish: true;
+    populateCreatorFields: true;
   };
   attributes: {
     ads_cards: Schema.Attribute.Relation<
@@ -1142,8 +1340,7 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     >;
     casinos: Schema.Attribute.Relation<'oneToMany', 'api::casino.casino'>;
     createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
     description: Schema.Attribute.RichText & Schema.Attribute.Required;
     description_ads_cards: Schema.Attribute.Relation<
       'oneToMany',
@@ -1187,6 +1384,10 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
         },
         number
       >;
+    sidebar_ads_cards: Schema.Attribute.Component<
+      'text-field.sidebar-ads-cards',
+      true
+    >;
     sidebar_bonus_ads_cards: Schema.Attribute.Relation<
       'oneToMany',
       'api::welcome-bonus-card.welcome-bonus-card'
@@ -1195,7 +1396,6 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
       'manyToOne',
       'api::slot-content-page.slot-content-page'
     >;
-    slot_preview: Schema.Attribute.Media<'files' | 'videos', true>;
     slot_theme: Schema.Attribute.Relation<
       'manyToOne',
       'api::slot-theme.slot-theme'
@@ -1204,8 +1404,7 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
     volatility: Schema.Attribute.Enumeration<['high', 'medium', 'low']>;
   };
 }
@@ -2028,6 +2227,7 @@ declare module '@strapi/strapi' {
       'api::casino-page.casino-page': ApiCasinoPageCasinoPage;
       'api::casino.casino': ApiCasinoCasino;
       'api::cookie-policy.cookie-policy': ApiCookiePolicyCookiePolicy;
+      'api::first-countdown-section.first-countdown-section': ApiFirstCountdownSectionFirstCountdownSection;
       'api::game-type.game-type': ApiGameTypeGameType;
       'api::guide-and-news-page.guide-and-news-page': ApiGuideAndNewsPageGuideAndNewsPage;
       'api::guide-page.guide-page': ApiGuidePageGuidePage;
@@ -2035,11 +2235,15 @@ declare module '@strapi/strapi' {
       'api::home-first-cta.home-first-cta': ApiHomeFirstCtaHomeFirstCta;
       'api::home-second-cta.home-second-cta': ApiHomeSecondCtaHomeSecondCta;
       'api::live-statistic.live-statistic': ApiLiveStatisticLiveStatistic;
+      'api::new-slot.new-slot': ApiNewSlotNewSlot;
       'api::news-and-preview.news-and-preview': ApiNewsAndPreviewNewsAndPreview;
       'api::poker-page.poker-page': ApiPokerPagePokerPage;
       'api::poker.poker': ApiPokerPoker;
       'api::privacy-policy.privacy-policy': ApiPrivacyPolicyPrivacyPolicy;
+      'api::second-countdown-section.second-countdown-section': ApiSecondCountdownSectionSecondCountdownSection;
       'api::slot-content-page.slot-content-page': ApiSlotContentPageSlotContentPage;
+      'api::slot-grati.slot-grati': ApiSlotGratiSlotGrati;
+      'api::slot-online.slot-online': ApiSlotOnlineSlotOnline;
       'api::slot-page.slot-page': ApiSlotPageSlotPage;
       'api::slot-provider.slot-provider': ApiSlotProviderSlotProvider;
       'api::slot-theme.slot-theme': ApiSlotThemeSlotTheme;

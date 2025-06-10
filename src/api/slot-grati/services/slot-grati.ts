@@ -1,0 +1,7 @@
+/**
+ * slot-grati service
+ */
+
+import { factories } from '@strapi/strapi';
+
+export default factories.createCoreService('api::slot-grati.slot-grati');
