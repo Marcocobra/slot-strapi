@@ -5,7 +5,7 @@ export default factories.createCoreController(
   ({ strapi }) => ({
     async find(ctx) {
       const searchQuery =
-        ctx.query.query?.toString().trim().toLowerCase() || '';
+        ctx.query.query?.toString().trim().toLowerCase() || "";
       const page = parseInt(
         (ctx.query["pagination[page]"] as string) || "1",
         10
@@ -16,24 +16,6 @@ export default factories.createCoreController(
       );
       const start = (page - 1) * pageSize;
 
-<<<<<<< HEAD
-      const fullData = await strapi.entityService.findMany("api::slot.slot", {
-        populate: {
-          thumbnail: true,
-          slot_theme: true,
-          provider: { populate: { provider_logo: true } },
-          casinos: { populate: { thumbnail: true } },
-          faq: true,
-          ads_cards: { populate: { thumbnail: true } },
-          slot_content_page: true,
-          news_and_preview: true,
-          related_slots: {
-            populate: {
-              thumbnail: true,
-              slot_theme: true,
-              slot_content_page: true,
-            },
-=======
       // Base population for all queries
       const populate = {
         thumbnail: true,
@@ -49,31 +31,10 @@ export default factories.createCoreController(
             thumbnail: true,
             slot_theme: true,
             slot_content_page: true,
->>>>>>> 2e7c2b88167dcf45bb29e8b82feb28571fa351e7
           },
         },
       };
 
-<<<<<<< HEAD
-      const filtered = fullData.filter((slot: any) => {
-        const q = searchQuery.toLowerCase();
-        const numericQuery = parseFloat(searchQuery.replace("%", ""));
-        const isNumeric = !isNaN(numericQuery);
-        const isRtpQuery = searchQuery.includes("%");
-        const isVolatility = ["low", "medium", "high"].includes(q);
-
-        return (
-          slot.title?.toLowerCase().includes(q) ||
-          (typeof slot.provider === "string" &&
-            slot.provider.toLowerCase().includes(q)) ||
-          slot.payline_system?.toLowerCase().includes(q) ||
-          slot.slot_theme?.title?.toLowerCase().includes(q) ||
-          (isVolatility && slot.volatility?.toLowerCase() === q) ||
-          (isRtpQuery && Math.abs(slot.rtp - numericQuery) <= 0.5) ||
-          (isNumeric && Math.abs(slot.rtp - numericQuery) <= 0.5)
-        );
-      });
-=======
       // If no search query, return paginated results
       if (!searchQuery) {
         const { data, meta } = await super.find(ctx);
@@ -81,15 +42,14 @@ export default factories.createCoreController(
       }
 
       // Parse query for specific types
-      const numericQuery = parseFloat(searchQuery.replace(/[^0-9.]/g, '')); // Extract numeric part
+      const numericQuery = parseFloat(searchQuery.replace(/[^0-9.]/g, "")); // Extract numeric part
       const isNumeric = !isNaN(numericQuery);
       const isRtpQuery =
-        searchQuery.includes('%') || searchQuery.includes('rtp');
-      const isMaxWinQuery = searchQuery.toLowerCase().includes('x');
+        searchQuery.includes("%") || searchQuery.includes("rtp");
+      const isMaxWinQuery = searchQuery.toLowerCase().includes("x");
       const isVolatilityQuery = searchQuery.match(
         /(volatilità\s+)?(low|medium|high|alta|media|bassa)/i
       );
->>>>>>> 2e7c2b88167dcf45bb29e8b82feb28571fa351e7
 
       // Build filters with explicit typing to avoid TS errors
       const filters: any = {
@@ -108,12 +68,12 @@ export default factories.createCoreController(
       // Handle volatility query (e.g., "volatilità alta" or "high")
       if (isVolatilityQuery) {
         const volatilityMap: { [key: string]: string } = {
-          alta: 'high',
-          media: 'medium',
-          bassa: 'low',
-          high: 'high',
-          medium: 'medium',
-          low: 'low',
+          alta: "high",
+          media: "medium",
+          bassa: "low",
+          high: "high",
+          medium: "medium",
+          low: "low",
         };
         const volatility = volatilityMap[isVolatilityQuery[2].toLowerCase()];
         filters.$or.push({ volatility: { $eq: volatility } });
@@ -126,13 +86,13 @@ export default factories.createCoreController(
 
       // Fetch filtered and paginated data
       const [slots, total] = await Promise.all([
-        strapi.entityService.findMany('api::slot.slot', {
+        strapi.entityService.findMany("api::slot.slot", {
           filters,
           populate,
           pagination: { start, limit: pageSize },
-          sort: isRtpQuery ? { rtp: 'asc' } : { title: 'asc' },
+          sort: isRtpQuery ? { rtp: "asc" } : { title: "asc" },
         }),
-        strapi.entityService.count('api::slot.slot', {
+        strapi.entityService.count("api::slot.slot", {
           filters,
         }),
       ]);
