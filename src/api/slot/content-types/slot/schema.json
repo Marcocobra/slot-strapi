@@ -25,7 +25,9 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "slug": {
       "type": "uid",
@@ -48,7 +50,11 @@
     },
     "volatility": {
       "type": "enumeration",
-      "enum": ["high", "medium", "low"]
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
     },
     "meta_title": {
       "type": "string"
@@ -125,6 +131,11 @@
       "type": "component",
       "repeatable": true,
       "component": "text-field.sidebar-ads-cards"
+    },
+    "admin_users": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "admin::user"
     }
   }
 }

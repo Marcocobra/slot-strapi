@@ -1131,7 +1131,7 @@ export interface ApiSlotContentPageSlotContentPage
       true
     >;
     slots: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
-    slug: Schema.Attribute.String & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1334,6 +1334,7 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     populateCreatorFields: true;
   };
   attributes: {
+    admin_users: Schema.Attribute.Relation<'oneToMany', 'admin::user'>;
     ads_cards: Schema.Attribute.Relation<
       'oneToMany',
       'api::welcome-bonus-card.welcome-bonus-card'
