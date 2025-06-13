@@ -1028,6 +1028,37 @@ export interface ApiPokerPoker extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPopUpPopUp extends Struct.SingleTypeSchema {
+  collectionName: 'pop_ups';
+  info: {
+    displayName: 'Pop up';
+    pluralName: 'pop-ups';
+    singularName: 'pop-up';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::pop-up.pop-up'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    welcome_bonus_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
+  };
+}
+
 export interface ApiPrivacyPolicyPrivacyPolicy extends Struct.SingleTypeSchema {
   collectionName: 'privacy_policies';
   info: {
@@ -1132,85 +1163,6 @@ export interface ApiSlotContentPageSlotContentPage
     >;
     slots: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
     slug: Schema.Attribute.UID<'title'>;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiSlotGratiSlotGrati extends Struct.SingleTypeSchema {
-  collectionName: 'slot_gratis';
-  info: {
-    description: '';
-    displayName: 'Slot gratis';
-    pluralName: 'slot-gratis';
-    singularName: 'slot-grati';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    ads_cards: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::welcome-bonus-card.welcome-bonus-card'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.RichText;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::slot-grati.slot-grati'
-    > &
-      Schema.Attribute.Private;
-    meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
-    meta_title: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    sidebar_ads_cards: Schema.Attribute.Component<
-      'text-field.sidebar-ads-cards',
-      true
-    >;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiSlotOnlineSlotOnline extends Struct.SingleTypeSchema {
-  collectionName: 'slot_onlines';
-  info: {
-    displayName: 'Slot online';
-    pluralName: 'slot-onlines';
-    singularName: 'slot-online';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    ads_cards: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::welcome-bonus-card.welcome-bonus-card'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.RichText;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::slot-online.slot-online'
-    > &
-      Schema.Attribute.Private;
-    meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
-    meta_title: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    sidebar_ads_cards: Schema.Attribute.Component<
-      'text-field.sidebar-ads-cards',
-      true
-    >;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -2240,11 +2192,10 @@ declare module '@strapi/strapi' {
       'api::news-and-preview.news-and-preview': ApiNewsAndPreviewNewsAndPreview;
       'api::poker-page.poker-page': ApiPokerPagePokerPage;
       'api::poker.poker': ApiPokerPoker;
+      'api::pop-up.pop-up': ApiPopUpPopUp;
       'api::privacy-policy.privacy-policy': ApiPrivacyPolicyPrivacyPolicy;
       'api::second-countdown-section.second-countdown-section': ApiSecondCountdownSectionSecondCountdownSection;
       'api::slot-content-page.slot-content-page': ApiSlotContentPageSlotContentPage;
-      'api::slot-grati.slot-grati': ApiSlotGratiSlotGrati;
-      'api::slot-online.slot-online': ApiSlotOnlineSlotOnline;
       'api::slot-page.slot-page': ApiSlotPageSlotPage;
       'api::slot-provider.slot-provider': ApiSlotProviderSlotProvider;
       'api::slot-theme.slot-theme': ApiSlotThemeSlotTheme;
