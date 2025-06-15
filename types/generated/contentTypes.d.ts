@@ -1088,6 +1088,35 @@ export interface ApiPrivacyPolicyPrivacyPolicy extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiSearchBarPlaceholderSearchBarPlaceholder
+  extends Struct.SingleTypeSchema {
+  collectionName: 'search_bar_placeholders';
+  info: {
+    displayName: 'search bar placeholder';
+    pluralName: 'search-bar-placeholders';
+    singularName: 'search-bar-placeholder';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::search-bar-placeholder.search-bar-placeholder'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSecondCountdownSectionSecondCountdownSection
   extends Struct.SingleTypeSchema {
   collectionName: 'second_countdown_sections';
@@ -2194,6 +2223,7 @@ declare module '@strapi/strapi' {
       'api::poker.poker': ApiPokerPoker;
       'api::pop-up.pop-up': ApiPopUpPopUp;
       'api::privacy-policy.privacy-policy': ApiPrivacyPolicyPrivacyPolicy;
+      'api::search-bar-placeholder.search-bar-placeholder': ApiSearchBarPlaceholderSearchBarPlaceholder;
       'api::second-countdown-section.second-countdown-section': ApiSecondCountdownSectionSecondCountdownSection;
       'api::slot-content-page.slot-content-page': ApiSlotContentPageSlotContentPage;
       'api::slot-page.slot-page': ApiSlotPageSlotPage;
