@@ -29,10 +29,6 @@
       "repeatable": true,
       "component": "text-field.repeatable"
     },
-    "slug": {
-      "type": "string",
-      "required": true
-    },
     "sidebar_ads_cards": {
       "type": "component",
       "repeatable": true,
@@ -45,6 +41,10 @@
     },
     "meta_title": {
       "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
     }
   }
 }

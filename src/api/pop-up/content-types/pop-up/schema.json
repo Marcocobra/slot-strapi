@@ -1,0 +1,19 @@
+{
+  "kind": "singleType",
+  "collectionName": "pop_ups",
+  "info": {
+    "singularName": "pop-up",
+    "pluralName": "pop-ups",
+    "displayName": "Pop up"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "welcome_bonus_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::welcome-bonus-card.welcome-bonus-card"
+    }
+  }
+}
