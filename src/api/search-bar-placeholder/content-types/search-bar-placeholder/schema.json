@@ -1,10 +1,10 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "search_bar_placeholders",
   "info": {
     "singularName": "search-bar-placeholder",
     "pluralName": "search-bar-placeholders",
-    "displayName": "search bar placeholder"
+    "displayName": "Search bar placeholder"
   },
   "options": {
     "draftAndPublish": true
@@ -12,7 +12,7 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": false
+      "required": true
     }
   }
 }
