@@ -1089,10 +1089,10 @@ export interface ApiPrivacyPolicyPrivacyPolicy extends Struct.SingleTypeSchema {
 }
 
 export interface ApiSearchBarPlaceholderSearchBarPlaceholder
-  extends Struct.SingleTypeSchema {
+  extends Struct.CollectionTypeSchema {
   collectionName: 'search_bar_placeholders';
   info: {
-    displayName: 'search bar placeholder';
+    displayName: 'Search bar placeholder';
     pluralName: 'search-bar-placeholders';
     singularName: 'search-bar-placeholder';
   };
@@ -1110,7 +1110,7 @@ export interface ApiSearchBarPlaceholderSearchBarPlaceholder
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    title: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
