@@ -25,9 +25,7 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "slug": {
       "type": "uid",
@@ -50,11 +48,7 @@
     },
     "volatility": {
       "type": "enumeration",
-      "enum": [
-        "high",
-        "medium",
-        "low"
-      ]
+      "enum": ["high", "medium", "low"]
     },
     "meta_title": {
       "type": "string"
@@ -69,11 +63,6 @@
     "pros": {
       "type": "richtext",
       "required": true
-    },
-    "related_slots": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::slot.slot"
     },
     "casinos": {
       "type": "relation",

@@ -1358,7 +1358,6 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
         },
         number
       >;
-    related_slots: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
     rtp: Schema.Attribute.Decimal &
       Schema.Attribute.SetMinMax<
         {
