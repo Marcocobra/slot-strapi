@@ -61,13 +61,6 @@ export default factories.createCoreController(
         ads_cards: { populate: { thumbnail: true } },
         slot_content_page: true,
         news_and_preview: true,
-        related_slots: {
-          populate: {
-            thumbnail: true,
-            slot_theme: true,
-            slot_content_page: true,
-          },
-        },
       };
 
       // If no search query, return paginated results
