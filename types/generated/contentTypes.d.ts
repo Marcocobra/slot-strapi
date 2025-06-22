@@ -828,6 +828,90 @@ export interface ApiHomeSecondCtaHomeSecondCta extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiLiveGameLiveGame extends Struct.SingleTypeSchema {
+  collectionName: 'live_games';
+  info: {
+    description: '';
+    displayName: 'Live game';
+    pluralName: 'live-games';
+    singularName: 'live-game';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    featured_live_game_post: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::live-games-post.live-games-post'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::live-game.live-game'
+    > &
+      Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
+    meta_title: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    sidebar_ads_cards: Schema.Attribute.Component<
+      'text-field.sidebar-ads-cards',
+      true
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiLiveGamesPostLiveGamesPost
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'live_games_posts';
+  info: {
+    description: '';
+    displayName: 'Live games post';
+    pluralName: 'live-games-posts';
+    singularName: 'live-games-post';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::live-games-post.live-games-post'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    related_live_games_posts: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::live-games-post.live-games-post'
+    >;
+    slug: Schema.Attribute.UID<'title'>;
+    thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiLiveStatisticLiveStatistic
   extends Struct.CollectionTypeSchema {
   collectionName: 'live_statistics';
@@ -2215,6 +2299,8 @@ declare module '@strapi/strapi' {
       'api::guide.guide': ApiGuideGuide;
       'api::home-first-cta.home-first-cta': ApiHomeFirstCtaHomeFirstCta;
       'api::home-second-cta.home-second-cta': ApiHomeSecondCtaHomeSecondCta;
+      'api::live-game.live-game': ApiLiveGameLiveGame;
+      'api::live-games-post.live-games-post': ApiLiveGamesPostLiveGamesPost;
       'api::live-statistic.live-statistic': ApiLiveStatisticLiveStatistic;
       'api::new-slot.new-slot': ApiNewSlotNewSlot;
       'api::news-and-preview.news-and-preview': ApiNewsAndPreviewNewsAndPreview;

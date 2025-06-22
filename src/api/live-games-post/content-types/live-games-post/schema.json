@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "live_games_posts",
+  "info": {
+    "singularName": "live-games-post",
+    "pluralName": "live-games-posts",
+    "displayName": "Live games post",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "related_live_games_posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::live-games-post.live-games-post"
+    },
+    "ads_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::welcome-bonus-card.welcome-bonus-card"
+    }
+  }
+}
