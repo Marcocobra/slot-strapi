@@ -17,7 +17,7 @@
     },
     "slots": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::slot.slot",
       "mappedBy": "slot_theme"
     }

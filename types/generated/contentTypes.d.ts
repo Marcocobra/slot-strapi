@@ -1378,7 +1378,7 @@ export interface ApiSlotThemeSlotTheme extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    slots: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
+    slots: Schema.Attribute.Relation<'manyToMany', 'api::slot.slot'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1396,7 +1396,6 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
   };
   options: {
     draftAndPublish: true;
-    populateCreatorFields: true;
   };
   attributes: {
     admin_users: Schema.Attribute.Relation<'oneToMany', 'admin::user'>;
@@ -1406,7 +1405,8 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     >;
     casinos: Schema.Attribute.Relation<'oneToMany', 'api::casino.casino'>;
     createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
     description: Schema.Attribute.RichText & Schema.Attribute.Required;
     description_ads_cards: Schema.Attribute.Relation<
       'oneToMany',
@@ -1462,14 +1462,15 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
       'api::slot-content-page.slot-content-page'
     >;
     slot_theme: Schema.Attribute.Relation<
-      'manyToOne',
+      'manyToMany',
       'api::slot-theme.slot-theme'
     >;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
     volatility: Schema.Attribute.Enumeration<['high', 'medium', 'low']>;
   };
 }
