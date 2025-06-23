@@ -1,0 +1,42 @@
+{
+  "kind": "singleType",
+  "collectionName": "live_games",
+  "info": {
+    "singularName": "live-game",
+    "pluralName": "live-games",
+    "displayName": "Live game",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "meta_title": {
+      "type": "string",
+      "required": false
+    },
+    "meta_keyword": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.repeatable"
+    },
+    "meta_description": {
+      "type": "text"
+    },
+    "ads_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::welcome-bonus-card.welcome-bonus-card"
+    },
+    "sidebar_ads_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.sidebar-ads-cards"
+    },
+    "featured_live_game_post": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::live-games-post.live-games-post"
+    }
+  }
+}
