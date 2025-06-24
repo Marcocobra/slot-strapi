@@ -1,0 +1,45 @@
+{
+  "collectionName": "components_text_field_video_embeds",
+  "info": {
+    "displayName": "Video Embed",
+    "icon": "video",
+    "description": "Embed video content from various platforms"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "video_url": {
+      "type": "string",
+      "required": true
+    },
+    "video_type": {
+      "type": "enumeration",
+      "enum": ["youtube", "vimeo", "dailymotion", "twitch", "custom"],
+      "required": true
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "description": {
+      "type": "text"
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": false
+    },
+    "muted": {
+      "type": "boolean",
+      "default": false
+    },
+    "controls": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

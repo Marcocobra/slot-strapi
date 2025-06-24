@@ -120,6 +120,28 @@ export interface TextFieldSpinCard extends Struct.ComponentSchema {
   };
 }
 
+export interface TextFieldVideoEmbed extends Struct.ComponentSchema {
+  collectionName: 'components_text_field_video_embeds';
+  info: {
+    description: 'Embed video content from various platforms';
+    displayName: 'Video Embed';
+    icon: 'video';
+  };
+  attributes: {
+    autoplay: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    controls: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    description: Schema.Attribute.Text;
+    muted: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    thumbnail: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    video_type: Schema.Attribute.Enumeration<
+      ['youtube', 'vimeo', 'dailymotion', 'twitch', 'custom']
+    > &
+      Schema.Attribute.Required;
+    video_url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -130,6 +152,7 @@ declare module '@strapi/strapi' {
       'text-field.slot-faq': TextFieldSlotFaq;
       'text-field.slot-history': TextFieldSlotHistory;
       'text-field.spin-card': TextFieldSpinCard;
+      'text-field.video-embed': TextFieldVideoEmbed;
     }
   }
 }
