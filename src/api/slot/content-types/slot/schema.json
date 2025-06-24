@@ -34,7 +34,7 @@
     },
     "slot_theme": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::slot-theme.slot-theme",
       "inversedBy": "slots"
     },
@@ -48,7 +48,7 @@
     },
     "volatility": {
       "type": "enumeration",
-      "enum": ["high", "medium", "low"]
+      "enum": ["low", "medium_low", "average", "medium_high", "high"]
     },
     "meta_title": {
       "type": "string"

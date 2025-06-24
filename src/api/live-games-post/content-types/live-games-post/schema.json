@@ -19,9 +19,7 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "slug": {
       "type": "uid",
@@ -29,6 +27,17 @@
     },
     "description": {
       "type": "richtext"
+    },
+    "video": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["videos"]
+    },
+    "video_embeds": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.video-embed"
     },
     "related_live_games_posts": {
       "type": "relation",

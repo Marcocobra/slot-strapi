@@ -909,6 +909,8 @@ export interface ApiLiveGamesPostLiveGamesPost
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    video: Schema.Attribute.Media<'videos'>;
+    video_embeds: Schema.Attribute.Component<'text-field.video-embed', true>;
   };
 }
 
@@ -1378,7 +1380,7 @@ export interface ApiSlotThemeSlotTheme extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    slots: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
+    slots: Schema.Attribute.Relation<'manyToMany', 'api::slot.slot'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1462,7 +1464,7 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
       'api::slot-content-page.slot-content-page'
     >;
     slot_theme: Schema.Attribute.Relation<
-      'manyToOne',
+      'manyToMany',
       'api::slot-theme.slot-theme'
     >;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
@@ -1470,7 +1472,9 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
-    volatility: Schema.Attribute.Enumeration<['high', 'medium', 'low']>;
+    volatility: Schema.Attribute.Enumeration<
+      ['low', 'medium_low', 'average', 'medium_high', 'high']
+    >;
   };
 }
 
