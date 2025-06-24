@@ -8,7 +8,8 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": true,
+    "populateCreatorFields": true
   },
   "attributes": {
     "title": {
@@ -24,9 +25,7 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "slug": {
       "type": "uid",
@@ -49,11 +48,7 @@
     },
     "volatility": {
       "type": "enumeration",
-      "enum": [
-        "high",
-        "medium",
-        "low"
-      ]
+      "enum": ["low", "medium_low", "average", "medium_high", "high"]
     },
     "meta_title": {
       "type": "string"

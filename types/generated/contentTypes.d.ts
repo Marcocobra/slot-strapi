@@ -1398,6 +1398,7 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
   };
   options: {
     draftAndPublish: true;
+    populateCreatorFields: true;
   };
   attributes: {
     admin_users: Schema.Attribute.Relation<'oneToMany', 'admin::user'>;
@@ -1407,8 +1408,7 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     >;
     casinos: Schema.Attribute.Relation<'oneToMany', 'api::casino.casino'>;
     createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
     description: Schema.Attribute.RichText & Schema.Attribute.Required;
     description_ads_cards: Schema.Attribute.Relation<
       'oneToMany',
@@ -1471,9 +1471,10 @@ export interface ApiSlotSlot extends Struct.CollectionTypeSchema {
     thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    volatility: Schema.Attribute.Enumeration<['high', 'medium', 'low']>;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
+    volatility: Schema.Attribute.Enumeration<
+      ['low', 'medium_low', 'average', 'medium_high', 'high']
+    >;
   };
 }
 
