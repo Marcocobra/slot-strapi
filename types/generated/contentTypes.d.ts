@@ -1002,7 +1002,7 @@ export interface ApiNewsAndPreviewNewsAndPreview
   collectionName: 'news_and_previews';
   info: {
     description: '';
-    displayName: 'News and preview';
+    displayName: 'Previews';
     pluralName: 'news-and-previews';
     singularName: 'news-and-preview';
   };
