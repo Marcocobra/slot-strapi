@@ -953,7 +953,7 @@ export interface ApiLiveStatisticLiveStatistic
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    video: Schema.Attribute.Media<'videos'>;
+    video: Schema.Attribute.Text;
   };
 }
 
@@ -1002,7 +1002,7 @@ export interface ApiNewsAndPreviewNewsAndPreview
   collectionName: 'news_and_previews';
   info: {
     description: '';
-    displayName: 'News and preview';
+    displayName: 'Previews';
     pluralName: 'news-and-previews';
     singularName: 'news-and-preview';
   };

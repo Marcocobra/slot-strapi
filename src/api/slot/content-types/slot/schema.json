@@ -25,7 +25,9 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "slug": {
       "type": "uid",
@@ -48,7 +50,13 @@
     },
     "volatility": {
       "type": "enumeration",
-      "enum": ["low", "medium_low", "average", "medium_high", "high"]
+      "enum": [
+        "low",
+        "medium_low",
+        "average",
+        "medium_high",
+        "high"
+      ]
     },
     "meta_title": {
       "type": "string"
