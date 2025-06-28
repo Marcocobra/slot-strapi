@@ -22,14 +22,6 @@
     "secondary_description": {
       "type": "richtext"
     },
-    "video": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "videos"
-      ]
-    },
     "spin_cards": {
       "type": "component",
       "repeatable": true,
@@ -50,6 +42,9 @@
       "relation": "manyToMany",
       "target": "api::spin-history.spin-history",
       "mappedBy": "live_statistics"
+    },
+    "video": {
+      "type": "text"
     }
   }
 }
