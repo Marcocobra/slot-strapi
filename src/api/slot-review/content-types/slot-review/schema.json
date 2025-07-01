@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "slot_reviews",
+  "info": {
+    "singularName": "slot-review",
+    "pluralName": "slot-reviews",
+    "displayName": "Slot review",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "ads_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::welcome-bonus-card.welcome-bonus-card"
+    },
+    "sidebar_ads_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.sidebar-ads-cards"
+    }
+  }
+}
