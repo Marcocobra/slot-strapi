@@ -46,6 +46,11 @@
     "slug": {
       "type": "uid",
       "targetField": "title"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.slot-faq"
     }
   }
 }
