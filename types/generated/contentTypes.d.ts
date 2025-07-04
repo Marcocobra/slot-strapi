@@ -529,6 +529,35 @@ export interface ApiCasinoCasino extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiContactContact extends Struct.CollectionTypeSchema {
+  collectionName: 'contacts';
+  info: {
+    displayName: 'Contact';
+    pluralName: 'contacts';
+    singularName: 'contact';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.Text & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::contact.contact'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCookiePolicyCookiePolicy extends Struct.SingleTypeSchema {
   collectionName: 'cookie_policies';
   info: {
@@ -2336,6 +2365,7 @@ declare module '@strapi/strapi' {
       'api::blog.blog': ApiBlogBlog;
       'api::casino-page.casino-page': ApiCasinoPageCasinoPage;
       'api::casino.casino': ApiCasinoCasino;
+      'api::contact.contact': ApiContactContact;
       'api::cookie-policy.cookie-policy': ApiCookiePolicyCookiePolicy;
       'api::first-countdown-section.first-countdown-section': ApiFirstCountdownSectionFirstCountdownSection;
       'api::game-type.game-type': ApiGameTypeGameType;
