@@ -1057,6 +1057,10 @@ export interface ApiNewsAndPreviewNewsAndPreview
     meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
     meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    sidebar_ads_bonus_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     sidebar_ads_cards: Schema.Attribute.Component<
       'text-field.sidebar-ads-cards',
       true
