@@ -122,7 +122,9 @@ export default factories.createCoreController(
           const keywords = [page.title.toLowerCase()];
           // Add common variations based on the title
           if (page.title.toLowerCase().includes('bar')) {
-            keywords.push('vlt', 'slot da bar');
+            keywords.push('slot da bar');
+          } else if (page.title.toLowerCase().includes('vlt')) {
+            keywords.push('slot vlt');
           }
           acc[page.slug] = keywords;
         }

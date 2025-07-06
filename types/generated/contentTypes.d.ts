@@ -609,7 +609,6 @@ export interface ApiFirstCountdownSectionFirstCountdownSection
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText & Schema.Attribute.Required;
-    link: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -617,6 +616,7 @@ export interface ApiFirstCountdownSectionFirstCountdownSection
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    slot: Schema.Attribute.Relation<'oneToOne', 'api::slot.slot'>;
     text_color: Schema.Attribute.String &
       Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
@@ -1031,7 +1031,7 @@ export interface ApiNewsAndPreviewNewsAndPreview
   collectionName: 'news_and_previews';
   info: {
     description: '';
-    displayName: 'Previews';
+    displayName: 'Anteprime';
     pluralName: 'news-and-previews';
     singularName: 'news-and-preview';
   };
@@ -1257,8 +1257,7 @@ export interface ApiSecondCountdownSectionSecondCountdownSection
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.RichText & Schema.Attribute.Required;
-    link: Schema.Attribute.String;
+    description: Schema.Attribute.RichText;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1266,6 +1265,7 @@ export interface ApiSecondCountdownSectionSecondCountdownSection
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    slot: Schema.Attribute.Relation<'oneToOne', 'api::slot.slot'>;
     text_color: Schema.Attribute.String &
       Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;

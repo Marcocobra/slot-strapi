@@ -19,9 +19,6 @@
       "type": "richtext",
       "required": true
     },
-    "link": {
-      "type": "string"
-    },
     "thumbnail": {
       "type": "media",
       "multiple": false,
@@ -47,6 +44,11 @@
     "button_text": {
       "type": "string",
       "required": false
+    },
+    "slot": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::slot.slot"
     }
   }
 }
