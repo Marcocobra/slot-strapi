@@ -4,7 +4,7 @@
   "info": {
     "singularName": "news-and-preview",
     "pluralName": "news-and-previews",
-    "displayName": "Previews",
+    "displayName": "Anteprime",
     "description": ""
   },
   "options": {
@@ -51,6 +51,11 @@
       "type": "component",
       "repeatable": true,
       "component": "text-field.slot-faq"
+    },
+    "sidebar_ads_bonus_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::welcome-bonus-card.welcome-bonus-card"
     }
   }
 }

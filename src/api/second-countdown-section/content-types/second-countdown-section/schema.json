@@ -15,13 +15,6 @@
       "type": "string",
       "required": true
     },
-    "description": {
-      "type": "richtext",
-      "required": true
-    },
-    "link": {
-      "type": "string"
-    },
     "thumbnail": {
       "type": "media",
       "multiple": false,
@@ -46,6 +39,14 @@
     },
     "button_text": {
       "type": "string"
+    },
+    "slot": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::slot.slot"
+    },
+    "description": {
+      "type": "richtext"
     }
   }
 }

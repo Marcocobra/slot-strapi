@@ -529,6 +529,35 @@ export interface ApiCasinoCasino extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiContactContact extends Struct.CollectionTypeSchema {
+  collectionName: 'contacts';
+  info: {
+    displayName: 'Contact';
+    pluralName: 'contacts';
+    singularName: 'contact';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.Text & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::contact.contact'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCookiePolicyCookiePolicy extends Struct.SingleTypeSchema {
   collectionName: 'cookie_policies';
   info: {
@@ -580,7 +609,6 @@ export interface ApiFirstCountdownSectionFirstCountdownSection
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText & Schema.Attribute.Required;
-    link: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -588,6 +616,7 @@ export interface ApiFirstCountdownSectionFirstCountdownSection
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    slot: Schema.Attribute.Relation<'oneToOne', 'api::slot.slot'>;
     text_color: Schema.Attribute.String &
       Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
@@ -1002,7 +1031,7 @@ export interface ApiNewsAndPreviewNewsAndPreview
   collectionName: 'news_and_previews';
   info: {
     description: '';
-    displayName: 'Previews';
+    displayName: 'Anteprime';
     pluralName: 'news-and-previews';
     singularName: 'news-and-preview';
   };
@@ -1028,6 +1057,10 @@ export interface ApiNewsAndPreviewNewsAndPreview
     meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
     meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    sidebar_ads_bonus_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     sidebar_ads_cards: Schema.Attribute.Component<
       'text-field.sidebar-ads-cards',
       true
@@ -1224,8 +1257,7 @@ export interface ApiSecondCountdownSectionSecondCountdownSection
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.RichText & Schema.Attribute.Required;
-    link: Schema.Attribute.String;
+    description: Schema.Attribute.RichText;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1233,6 +1265,7 @@ export interface ApiSecondCountdownSectionSecondCountdownSection
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    slot: Schema.Attribute.Relation<'oneToOne', 'api::slot.slot'>;
     text_color: Schema.Attribute.String &
       Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
@@ -2336,6 +2369,7 @@ declare module '@strapi/strapi' {
       'api::blog.blog': ApiBlogBlog;
       'api::casino-page.casino-page': ApiCasinoPageCasinoPage;
       'api::casino.casino': ApiCasinoCasino;
+      'api::contact.contact': ApiContactContact;
       'api::cookie-policy.cookie-policy': ApiCookiePolicyCookiePolicy;
       'api::first-countdown-section.first-countdown-section': ApiFirstCountdownSectionFirstCountdownSection;
       'api::game-type.game-type': ApiGameTypeGameType;

@@ -1,7 +1,7 @@
-import { factories } from "@strapi/strapi";
+import { factories } from '@strapi/strapi';
 
 export default factories.createCoreController(
-  "api::slot.slot",
+  'api::slot.slot',
   ({ strapi }) => ({
     async find(ctx) {
       // Check if this is a page-specific search (has filters in query)
@@ -21,7 +21,7 @@ export default factories.createCoreController(
             ],
             // Preserve other filters (like slot_content_page)
             ...Object.fromEntries(
-              Object.entries(filters || {}).filter(([key]) => key !== "title")
+              Object.entries(filters || {}).filter(([key]) => key !== 'title')
             ),
           };
         }
@@ -31,22 +31,22 @@ export default factories.createCoreController(
       }
 
       // Safely decode the search query with error handling
-      let searchQuery = "";
+      let searchQuery = '';
       try {
-        const rawQuery = ctx.query.query?.toString().trim().toLowerCase() || "";
+        const rawQuery = ctx.query.query?.toString().trim().toLowerCase() || '';
         // First try to decode any URL-encoded characters
         searchQuery = decodeURIComponent(rawQuery);
       } catch (error) {
         // If decoding fails, use the raw query
-        searchQuery = ctx.query.query?.toString().trim().toLowerCase() || "";
+        searchQuery = ctx.query.query?.toString().trim().toLowerCase() || '';
       }
 
       const page = parseInt(
-        (ctx.query["pagination[page]"] as string) || "1",
+        (ctx.query['pagination[page]'] as string) || '1',
         10
       );
       const pageSize = parseInt(
-        (ctx.query["pagination[pageSize]"] as string) || "10",
+        (ctx.query['pagination[pageSize]'] as string) || '10',
         10
       );
       const start = (page - 1) * pageSize;
@@ -71,8 +71,8 @@ export default factories.createCoreController(
 
       // Parse query for specific types
       const isRtpQuery =
-        searchQuery.includes("rtp") || searchQuery.includes("%");
-      const isMaxWinQuery = searchQuery.toLowerCase().includes("x");
+        searchQuery.includes('rtp') || searchQuery.includes('%');
+      const isMaxWinQuery = searchQuery.toLowerCase().includes('x');
       const isVolatilityQuery = searchQuery.match(
         /(volatilità\s+)?(low|medium|high|alta|media|bassa)/i
       );
@@ -87,7 +87,7 @@ export default factories.createCoreController(
         }
       } else {
         // For other queries, extract any number
-        numericQuery = parseFloat(searchQuery.replace(/[^0-9.]/g, ""));
+        numericQuery = parseFloat(searchQuery.replace(/[^0-9.]/g, ''));
       }
       const isNumeric = !isNaN(numericQuery);
 
@@ -104,12 +104,12 @@ export default factories.createCoreController(
 
       // Fetch slot content pages for dynamic keywords
       const slotContentPages = await strapi.entityService.findMany(
-        "api::slot-content-page.slot-content-page",
+        'api::slot-content-page.slot-content-page',
         {
-          fields: ["title", "slug"],
+          fields: ['title', 'slug'],
           populate: {
             slots: {
-              fields: ["title"],
+              fields: ['title'],
             },
           },
         }
@@ -121,8 +121,10 @@ export default factories.createCoreController(
           // Use the page title as a keyword and add common variations
           const keywords = [page.title.toLowerCase()];
           // Add common variations based on the title
-          if (page.title.toLowerCase().includes("bar")) {
-            keywords.push("vlt", "slot da bar");
+          if (page.title.toLowerCase().includes('bar')) {
+            keywords.push('slot da bar');
+          } else if (page.title.toLowerCase().includes('vlt')) {
+            keywords.push('slot vlt');
           }
           acc[page.slug] = keywords;
         }
@@ -131,8 +133,8 @@ export default factories.createCoreController(
 
       // Combine static and dynamic slot type keywords
       const slotTypeKeywords = {
-        jackpot: ["jackpot", "jp", "progressive"],
-        megaways: ["megaways", "megaway"],
+        jackpot: ['jackpot', 'jp', 'progressive'],
+        megaways: ['megaways', 'megaway'],
         ...dynamicSlotTypes,
       };
 
@@ -168,12 +170,12 @@ export default factories.createCoreController(
       // Handle volatility query (e.g., "volatilità alta" or "high")
       if (isVolatilityQuery) {
         const volatilityMap: { [key: string]: string } = {
-          alta: "high",
-          media: "medium",
-          bassa: "low",
-          high: "high",
-          medium: "medium",
-          low: "low",
+          alta: 'high',
+          media: 'medium',
+          bassa: 'low',
+          high: 'high',
+          medium: 'medium',
+          low: 'low',
         };
         const volatility = volatilityMap[isVolatilityQuery[2].toLowerCase()];
         filters.$or.push({ volatility: { $eq: volatility } });
@@ -194,20 +196,20 @@ export default factories.createCoreController(
 
       // Fetch filtered and paginated data for slots
       const [slots, slotsTotal] = await Promise.all([
-        strapi.entityService.findMany("api::slot.slot", {
+        strapi.entityService.findMany('api::slot.slot', {
           filters,
           populate,
           pagination: { start, limit: pageSize },
-          sort: isRtpQuery ? { rtp: "asc" } : { title: "asc" },
+          sort: isRtpQuery ? { rtp: 'asc' } : { title: 'asc' },
         }),
-        strapi.entityService.count("api::slot.slot", {
+        strapi.entityService.count('api::slot.slot', {
           filters,
         }),
       ]);
 
       // Search for guides
       const [guides, guidesTotal] = await Promise.all([
-        strapi.entityService.findMany("api::guide.guide", {
+        strapi.entityService.findMany('api::guide.guide', {
           filters: {
             $or: [
               { title: { $containsi: searchQuery } },
@@ -219,7 +221,7 @@ export default factories.createCoreController(
           },
           pagination: { start, limit: pageSize },
         }),
-        strapi.entityService.count("api::guide.guide", {
+        strapi.entityService.count('api::guide.guide', {
           filters: {
             $or: [
               { title: { $containsi: searchQuery } },
