@@ -74,7 +74,7 @@ export default factories.createCoreController(
         searchQuery.includes('rtp') || searchQuery.includes('%');
       const isMaxWinQuery = searchQuery.toLowerCase().includes('x');
       const isVolatilityQuery = searchQuery.match(
-        /(volatilità\s+)?(low|medium|high|alta|media|bassa)/i
+        /(volatilità\s+)?(medium low|medium high|medio bassa|medio alta|low|medium|high|alta|media|bassa)/i
       );
 
       // Extract numeric value based on query type
@@ -176,8 +176,13 @@ export default factories.createCoreController(
           high: 'high',
           medium: 'medium',
           low: 'low',
+          'medium high': 'medium_high',
+          'medium low': 'medium_low',
+          'medio bassa': 'medium_low',
+          'medio alta': 'medium_high',
         };
         const volatility = volatilityMap[isVolatilityQuery[2].toLowerCase()];
+        console.log({ isVolatilityQuery, volatility });
         filters.$or.push({ volatility: { $eq: volatility } });
       }
 
