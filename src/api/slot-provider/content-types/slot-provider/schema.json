@@ -28,6 +28,18 @@
       "relation": "oneToMany",
       "target": "api::slot.slot",
       "mappedBy": "provider"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "provider_name"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "ads_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::welcome-bonus-card.welcome-bonus-card"
     }
   }
 }

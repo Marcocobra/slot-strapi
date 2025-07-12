@@ -1208,6 +1208,46 @@ export interface ApiPrivacyPolicyPrivacyPolicy extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiProviderPageProviderPage extends Struct.SingleTypeSchema {
+  collectionName: 'provider_pages';
+  info: {
+    description: '';
+    displayName: 'Provider page';
+    pluralName: 'provider-pages';
+    singularName: 'provider-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::provider-page.provider-page'
+    > &
+      Schema.Attribute.Private;
+    meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
+    meta_title: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    sidebar_ads_cards: Schema.Attribute.Component<
+      'text-field.sidebar-ads-cards',
+      true
+    >;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSearchBarPlaceholderSearchBarPlaceholder
   extends Struct.CollectionTypeSchema {
   collectionName: 'search_bar_placeholders';
@@ -1373,9 +1413,14 @@ export interface ApiSlotProviderSlotProvider
     draftAndPublish: true;
   };
   attributes: {
+    ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    description: Schema.Attribute.RichText;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1386,6 +1431,7 @@ export interface ApiSlotProviderSlotProvider
     provider_logo: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     provider_name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'provider_name'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -2387,6 +2433,7 @@ declare module '@strapi/strapi' {
       'api::poker.poker': ApiPokerPoker;
       'api::pop-up.pop-up': ApiPopUpPopUp;
       'api::privacy-policy.privacy-policy': ApiPrivacyPolicyPrivacyPolicy;
+      'api::provider-page.provider-page': ApiProviderPageProviderPage;
       'api::search-bar-placeholder.search-bar-placeholder': ApiSearchBarPlaceholderSearchBarPlaceholder;
       'api::second-countdown-section.second-countdown-section': ApiSecondCountdownSectionSecondCountdownSection;
       'api::slot-content-page.slot-content-page': ApiSlotContentPageSlotContentPage;

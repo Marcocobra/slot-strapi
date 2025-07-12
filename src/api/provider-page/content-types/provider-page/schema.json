@@ -1,0 +1,40 @@
+{
+  "kind": "singleType",
+  "collectionName": "provider_pages",
+  "info": {
+    "singularName": "provider-page",
+    "pluralName": "provider-pages",
+    "displayName": "Provider page",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "meta_title": {
+      "type": "string"
+    },
+    "meta_keyword": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.repeatable"
+    },
+    "ads_cards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::welcome-bonus-card.welcome-bonus-card"
+    },
+    "sidebar_ads_cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "text-field.sidebar-ads-cards"
+    }
+  }
+}
