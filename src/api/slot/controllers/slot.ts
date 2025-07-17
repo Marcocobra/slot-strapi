@@ -74,7 +74,7 @@ export default factories.createCoreController(
         searchQuery.includes('rtp') || searchQuery.includes('%');
       const isMaxWinQuery = searchQuery.toLowerCase().includes('x');
       const isVolatilityQuery = searchQuery.match(
-        /(volatilità\s+)?(medium low|medium high|medio bassa|medio alta|low|medium|high|alta|media|bassa)/i
+        /(volatilità\s+)?(medium-low|medium-high|medio-bassa|medio-alta|medium low|medium high|medio bassa|medio alta|low|medium|high|alta|media|bassa)/i
       );
 
       // Extract numeric value based on query type
@@ -170,19 +170,23 @@ export default factories.createCoreController(
       // Handle volatility query (e.g., "volatilità alta" or "high")
       if (isVolatilityQuery) {
         const volatilityMap: { [key: string]: string } = {
+          'medium high': 'medium_high',
+          'medium low': 'medium_low',
+          'medio bassa': 'medium_low',
+          'medio alta': 'medium_high',
+          'medium-high': 'medium_high',
+          'medium-low': 'medium_low',
+          'medio-bassa': 'medium_low',
+          'medio-alta': 'medium_high',
           alta: 'high',
           media: 'medium',
           bassa: 'low',
           high: 'high',
           medium: 'medium',
           low: 'low',
-          'medium high': 'medium_high',
-          'medium low': 'medium_low',
-          'medio bassa': 'medium_low',
-          'medio alta': 'medium_high',
         };
         const volatility = volatilityMap[isVolatilityQuery[2].toLowerCase()];
-        console.log({ isVolatilityQuery, volatility });
+
         filters.$or.push({ volatility: { $eq: volatility } });
       }
 
@@ -190,7 +194,7 @@ export default factories.createCoreController(
       if (isRtpQuery && isNumeric && numericQuery >= 0) {
         const newRtpValue =
           numericQuery > 2000 ? numericQuery - 2000 : numericQuery;
-        console.log({ newRtpValue });
+
         if (newRtpValue <= 100) {
           const rtpValue = numericQuery;
           filters.$or.push({

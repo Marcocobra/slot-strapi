@@ -1228,6 +1228,7 @@ export interface ApiProviderPageProviderPage extends Struct.SingleTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText;
+    faq: Schema.Attribute.Component<'text-field.slot-faq', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1237,6 +1238,7 @@ export interface ApiProviderPageProviderPage extends Struct.SingleTypeSchema {
     meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
     meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    secondary_description: Schema.Attribute.RichText;
     sidebar_ads_cards: Schema.Attribute.Component<
       'text-field.sidebar-ads-cards',
       true
@@ -1431,6 +1433,10 @@ export interface ApiSlotProviderSlotProvider
     provider_logo: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     provider_name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    secondary_ads_cards: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::welcome-bonus-card.welcome-bonus-card'
+    >;
     slug: Schema.Attribute.UID<'provider_name'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
