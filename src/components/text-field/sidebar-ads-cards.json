@@ -20,7 +20,8 @@
       "type": "string"
     },
     "visit_the_site_link": {
-      "type": "string"
+      "type": "string",
+      "required": false
     },
     "sidebar_ads_cards_details": {
       "type": "component",
@@ -33,10 +34,12 @@
       "customField": "plugin::color-picker.color"
     },
     "with_deposit": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "without_deposit": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "text_color": {
       "type": "customField",

@@ -58,8 +58,8 @@ export interface TextFieldSidebarAdsCards extends Struct.ComponentSchema {
       Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     thumbnail: Schema.Attribute.Media<'images' | 'files'>;
     visit_the_site_link: Schema.Attribute.String;
-    with_deposit: Schema.Attribute.String;
-    without_deposit: Schema.Attribute.String;
+    with_deposit: Schema.Attribute.String & Schema.Attribute.Required;
+    without_deposit: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
