@@ -51,6 +51,9 @@
     },
     "meta_title": {
       "type": "string"
+    },
+    "meta_description": {
+      "type": "text"
     }
   }
 }
