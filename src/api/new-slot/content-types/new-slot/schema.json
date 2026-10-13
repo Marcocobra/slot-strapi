@@ -36,6 +36,9 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::welcome-bonus-card.welcome-bonus-card"
+    },
+    "meta_description": {
+      "type": "text"
     }
   }
 }
