@@ -433,6 +433,8 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     related_blogs: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
@@ -515,6 +517,8 @@ export interface ApiCasinoCasino extends Struct.CollectionTypeSchema {
       'api::casino.casino'
     > &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_title: Schema.Attribute.String;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     related_casinos: Schema.Attribute.Relation<
@@ -580,6 +584,8 @@ export interface ApiCookiePolicyCookiePolicy extends Struct.SingleTypeSchema {
       'api::cookie-policy.cookie-policy'
     > &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
@@ -686,6 +692,7 @@ export interface ApiGuideAndNewsPageGuideAndNewsPage
       'api::guide-and-news-page.guide-and-news-page'
     > &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
     meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
     meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
@@ -768,6 +775,8 @@ export interface ApiGuideGuide extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::guide.guide'> &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     related_guides: Schema.Attribute.Relation<'oneToMany', 'api::guide.guide'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
@@ -927,6 +936,8 @@ export interface ApiLiveGamesPostLiveGamesPost
       'api::live-games-post.live-games-post'
     > &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     related_live_games_posts: Schema.Attribute.Relation<
       'oneToMany',
@@ -970,6 +981,8 @@ export interface ApiLiveStatisticLiveStatistic
       'api::live-statistic.live-statistic'
     > &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     secondary_description: Schema.Attribute.RichText;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
@@ -1012,6 +1025,7 @@ export interface ApiNewSlotNewSlot extends Struct.SingleTypeSchema {
       'api::new-slot.new-slot'
     > &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
     meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
     meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
@@ -1054,6 +1068,7 @@ export interface ApiNewsAndPreviewNewsAndPreview
       'api::news-and-preview.news-and-preview'
     > &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
     meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
     meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
@@ -1068,6 +1083,40 @@ export interface ApiNewsAndPreviewNewsAndPreview
     slots: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
     slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPageSeoPageSeo extends Struct.CollectionTypeSchema {
+  collectionName: 'page_seos';
+  info: {
+    displayName: 'SEO pagine generali';
+    pluralName: 'page-seos';
+    singularName: 'page-seo';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::page-seo.page-seo'
+    > &
+      Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_title: Schema.Attribute.String;
+    page_key: Schema.Attribute.Enumeration<
+      ['home', 'contact', 'casinoLive', 'previews', 'guideHub', 'reviewHub']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1137,6 +1186,8 @@ export interface ApiPokerPoker extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::poker.poker'> &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     related_pokers: Schema.Attribute.Relation<'oneToMany', 'api::poker.poker'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
@@ -1200,6 +1251,8 @@ export interface ApiPrivacyPolicyPrivacyPolicy extends Struct.SingleTypeSchema {
       'api::privacy-policy.privacy-policy'
     > &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
@@ -1235,6 +1288,7 @@ export interface ApiProviderPageProviderPage extends Struct.SingleTypeSchema {
       'api::provider-page.provider-page'
     > &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
     meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
     meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
@@ -1345,6 +1399,7 @@ export interface ApiSlotContentPageSlotContentPage
       'api::slot-content-page.slot-content-page'
     > &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
     meta_keyword: Schema.Attribute.Component<'text-field.repeatable', true>;
     meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
@@ -1429,6 +1484,8 @@ export interface ApiSlotProviderSlotProvider
       'api::slot-provider.slot-provider'
     > &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_title: Schema.Attribute.String;
     provider: Schema.Attribute.Relation<'oneToMany', 'api::slot.slot'>;
     provider_logo: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     provider_name: Schema.Attribute.String & Schema.Attribute.Required;
@@ -1470,6 +1527,8 @@ export interface ApiSlotReviewSlotReview extends Struct.CollectionTypeSchema {
       'api::slot-review.slot-review'
     > &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     sidebar_ads_cards: Schema.Attribute.Component<
       'text-field.sidebar-ads-cards',
@@ -1705,6 +1764,8 @@ export interface ApiSportSport extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::sport.sport'> &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     related_sports: Schema.Attribute.Relation<'oneToMany', 'api::sport.sport'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
@@ -1739,6 +1800,8 @@ export interface ApiTermsAndConditionTermsAndCondition
       'api::terms-and-condition.terms-and-condition'
     > &
       Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_title: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
@@ -2435,6 +2498,7 @@ declare module '@strapi/strapi' {
       'api::live-statistic.live-statistic': ApiLiveStatisticLiveStatistic;
       'api::new-slot.new-slot': ApiNewSlotNewSlot;
       'api::news-and-preview.news-and-preview': ApiNewsAndPreviewNewsAndPreview;
+      'api::page-seo.page-seo': ApiPageSeoPageSeo;
       'api::poker-page.poker-page': ApiPokerPagePokerPage;
       'api::poker.poker': ApiPokerPoker;
       'api::pop-up.pop-up': ApiPopUpPopUp;
