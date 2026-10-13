@@ -46,6 +46,12 @@
       "relation": "manyToOne",
       "target": "api::guide-and-news-page.guide-and-news-page",
       "inversedBy": "guides"
+    },
+    "meta_title": {
+      "type": "string"
+    },
+    "meta_description": {
+      "type": "text"
     }
   }
 }
