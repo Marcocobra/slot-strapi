@@ -39,6 +39,12 @@
       "type": "component",
       "repeatable": true,
       "component": "text-field.sidebar-ads-cards"
+    },
+    "meta_title": {
+      "type": "string"
+    },
+    "meta_description": {
+      "type": "text"
     }
   }
 }
