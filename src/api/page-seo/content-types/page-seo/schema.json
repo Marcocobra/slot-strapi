@@ -1,0 +1,12 @@
+{
+  "kind": "collectionType",
+  "collectionName": "page_seos",
+  "info": { "singularName": "page-seo", "pluralName": "page-seos", "displayName": "SEO pagine generali" },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": {},
+  "attributes": {
+    "page_key": { "type": "enumeration", "enum": ["home", "contact", "casinoLive", "previews", "guideHub", "reviewHub"], "required": true, "unique": true },
+    "meta_title": { "type": "string" },
+    "meta_description": { "type": "text" }
+  }
+}
