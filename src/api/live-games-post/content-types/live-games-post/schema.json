@@ -19,7 +19,9 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "slug": {
       "type": "uid",
@@ -32,7 +34,9 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["videos"]
+      "allowedTypes": [
+        "videos"
+      ]
     },
     "video_embeds": {
       "type": "component",
@@ -48,6 +52,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::welcome-bonus-card.welcome-bonus-card"
+    },
+    "meta_title": {
+      "type": "string"
+    },
+    "meta_description": {
+      "type": "text"
     }
   }
 }
