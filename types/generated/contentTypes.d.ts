@@ -1123,6 +1123,38 @@ export interface ApiPageSeoPageSeo extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPagePage extends Struct.CollectionTypeSchema {
+  collectionName: 'pages';
+  info: {
+    description: 'Editable static pages, starting with Come valutiamo le slot';
+    displayName: 'Pages';
+    pluralName: 'pages';
+    singularName: 'page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    body: Schema.Attribute.RichText & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    last_updated: Schema.Attribute.Date;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::page.page'> &
+      Schema.Attribute.Private;
+    meta_description: Schema.Attribute.Text;
+    meta_title: Schema.Attribute.String;
+    published_slug: Schema.Attribute.String & Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPokerPagePokerPage extends Struct.SingleTypeSchema {
   collectionName: 'poker_pages';
   info: {
@@ -2499,6 +2531,7 @@ declare module '@strapi/strapi' {
       'api::new-slot.new-slot': ApiNewSlotNewSlot;
       'api::news-and-preview.news-and-preview': ApiNewsAndPreviewNewsAndPreview;
       'api::page-seo.page-seo': ApiPageSeoPageSeo;
+      'api::page.page': ApiPagePage;
       'api::poker-page.poker-page': ApiPokerPagePokerPage;
       'api::poker.poker': ApiPokerPoker;
       'api::pop-up.pop-up': ApiPopUpPopUp;
