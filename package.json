@@ -4,7 +4,7 @@
   "private": true,
   "description": "A Strapi application",
   "scripts": {
-    "test:pages": "NODE_ENV=test node scripts/page-integration.cjs",
+    "test:come-valutiamo": "NODE_ENV=test node scripts/come-valutiamo-integration.cjs",
     "build": "strapi build",
     "console": "strapi console",
     "deploy": "strapi deploy",

@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "come_valutiamos",
+  "info": {
+    "singularName": "come-valutiamo",
+    "pluralName": "come-valutiamos",
+    "displayName": "Come valutiamo"
+  },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": {},
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "body": { "type": "richtext", "required": true },
+    "meta_title": { "type": "string" },
+    "meta_description": { "type": "text" },
+    "last_updated": { "type": "date" }
+  }
+}

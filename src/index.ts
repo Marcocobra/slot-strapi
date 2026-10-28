@@ -1,5 +1,5 @@
 import type { Core } from '@strapi/strapi';
-import { registerPageEditorialGuards } from './extensions/page-editorial-guards';
+import { registerComeValutiamoEditorialDate } from './extensions/come-valutiamo-editorial-date';
 
 export default {
   /**
@@ -9,7 +9,7 @@ export default {
    * This gives you an opportunity to extend code.
    */
   register({ strapi }: { strapi: Core.Strapi }) {
-    registerPageEditorialGuards(strapi);
+    registerComeValutiamoEditorialDate(strapi);
   },
 
   /**

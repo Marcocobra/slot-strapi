@@ -12,11 +12,11 @@ The test environment explicitly selects local SQLite and local uploads:
 
 ```sh
 NODE_ENV=test STRAPI_TELEMETRY_DISABLED=true npm run build
-npm run test:pages
+npm run test:come-valutiamo
 NODE_ENV=test node scripts/seo-integration.cjs
 ```
 
-`test:pages` creates disposable fixtures only in `.tmp/page-test/data.db` and binds HTTP to `127.0.0.1:1341`. Its results are written to `.tmp/page-test/results.json`. The existing SEO integration suite uses `.tmp/seo-test/data.db` and port 1340. Both scripts reject a non-test environment and check the configured destination before loading Strapi. Build before running them so `dist` matches the source.
+`test:come-valutiamo` creates disposable fixtures only in `.tmp/come-valutiamo-test/data.db` and binds HTTP to `127.0.0.1:1341`. Its results are written to `.tmp/come-valutiamo-test/results.json`. The existing SEO integration suite uses `.tmp/seo-test/data.db` and port 1340. Both scripts reject a non-test environment and check the configured destination before loading Strapi. Build before running them so `dist` matches the source.
 
 Regenerate schema types after changing content types:
 
@@ -27,10 +27,10 @@ npx tsc --noEmit
 
 ## CMS contracts
 
-- [Static pages and the Come valutiamo implementation](docs/content-pages.md): fields, editorial workflow, API access and the frontend integration contract.
+- [Come valutiamo single type](docs/come-valutiamo.md): fields, editorial workflow, API access and the frontend integration contract.
 - [Existing SEO integration](SEO-INTEGRAZIONE.md): metadata fields and the separate `page-seo` collection for existing page templates.
 
-`Pages` stores complete static page content. `SEO pagine generali` stores metadata overrides for existing templates. Their purposes and permissions are separate.
+`Come valutiamo` is a dedicated single type, consistent with the existing static page models. It contains exactly the five agreed editorial fields. `SEO pagine generali` remains the separate collection for metadata overrides on existing templates.
 
 ## Changes and production releases
 
@@ -45,3 +45,5 @@ Before a production schema release:
 Do not treat a Git revert as a database recovery procedure: removing model fields can remove data. Preserve compatibility or coordinate a verified database restore with the code version. A restored backup excludes content created after its snapshot.
 
 The repository contains no production content seeds or deployment credentials. Page content is entered in Content Manager after the relevant schema is deployed and the editorial draft is approved.
+
+The 28 October conversion migration retires the generic `Pages` model only when its table contains no content or drafts. It remaps existing reader permissions and editor scopes to the replacement single type, preserving their owners and conditions. If the legacy table becomes populated, startup stops before schema sync; inspect and migrate those records before retrying. See the CMS contract for the endpoint and response change.
